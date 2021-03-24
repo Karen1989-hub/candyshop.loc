@@ -17,7 +17,7 @@
         <!--form start-->
         <div class="row row-deck">
             <div class="col-lg-8" style="margin: 0 auto">
-                <form action="{{route('createSliderPage')}}" method="post" class="card" enctype="multipart/form-data">
+                <form action="{{route('createCategory')}}" method="post" class="card" enctype="multipart/form-data">
                     @csrf
                     <div class="card-header">
                         <h3 class="card-title">Добавление новой категории</h3>
@@ -29,7 +29,8 @@
                             @if($errors->has('title')) <span style="color: red">{{$errors->first()}}</span> @endif
                             <div class="col-lg-4 col-sm-12 mt-5" style="margin: 0 auto">
                                 <input type="file" name="uploadImg" class="dropify" data-height="180"/>
-                                @if($errors->has('uploadImg')) <span style="color: red">{{$errors->first()}}</span> @endif
+                                @if($errors->has('uploadImg')) <span
+                                    style="color: red">{{$errors->first()}}</span> @endif
                             </div>
                         </div>
                     </div>
@@ -60,14 +61,15 @@
                             </thead>
                             <tbody>
                             <?php $n = 0; ?>
-                            {{-- --}}        {{-- @foreach($homePageSlider as $val)
-                        <tr>
-                            <th scope="row"><?php $n++; echo $n; ?></th>
-                            <td>{{$val->title}}</td>
-                            <th><a href="/frontEdit/deleteSliderPage/{{$val->id}}" class="btn btn-outline-danger"
-                                   style="float: right">Удалит</a></th>
-                        </tr>
-                    @endforeach --}}
+                            @foreach($categories as $val)
+                                <tr>
+                                    <th scope="row"><?php $n++; echo $n; ?></th>
+                                    <td>{{$val->title}}</td>
+                                    <th><a href="/frontEdit/deleteCategory/{{$val->id}}"
+                                           class="btn btn-outline-danger"
+                                           style="float: right">Удалит</a></th>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -80,7 +82,6 @@
 
     </div>
 </div>
-
 
 
 </div>

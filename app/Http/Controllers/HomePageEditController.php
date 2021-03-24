@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
@@ -61,7 +62,7 @@ class HomePageEditController extends Controller
         if ($adminKey == 'ak587238') {
             $deletedSlide = HomePageSlider::find($id);
             $deletedFileName = $deletedSlide->imgName;
-            unlink('images/homePageSliderImg/'.$deletedFileName);
+            unlink('images/homePageSliderImg/' . $deletedFileName);
 
             HomePageSlider::destroy($id);
             return redirect()->route('getEditSliderPage');
@@ -70,5 +71,54 @@ class HomePageEditController extends Controller
         }
     }
 
-    public function createCategory(){}
+    public function createCategory(Request $request)
+    {
+        $adminKey = Cookie::get('adminKey');
+        if ($adminKey == 'ak587238') {
+            $title = $request->input('title');
+            $file = $request->file('uploadImg');
+
+            $validator = Validator::make($request->all(),
+                [
+                    'title' => 'required|max:20',
+                    'uploadImg' => 'required'
+                ], [
+                    'title.required' => 'поле должно быт заполненно',
+                    'title.max' => 'поле должно быть не больше 20 синволов',
+                    'uploadImg.required' => 'поле должно быт заполненно'
+                ]
+            );
+            if ($validator->fails()) {
+                return back()->withErrors($validator)->withInput();
+            }
+            Category::create([
+                'title' => $title
+            ]);
+
+            $maxId = Category::max('id');
+            $file->move('images/categoriesImg', $maxId . ".jpg");
+            $update = Category::find($maxId);
+            $update->imgName = $maxId . ".jpg";
+            $update->save();
+
+            return redirect()->route('getEditProduktCategory');
+        } else {
+            return abort('404');
+        }
+    }
+
+    public function deleteCategory($id)
+    {
+        $adminKey = Cookie::get('adminKey');
+        if ($adminKey == 'ak587238') {
+            $deletedSlide = Category::find($id);
+            $deletedFileName = $deletedSlide->imgName;
+            unlink('images/categoriesImg/' . $deletedFileName);
+
+            Category::destroy($id);
+            return redirect()->route('getEditProduktCategory');
+        } else {
+            return abort('404');
+        }
+    }
 }

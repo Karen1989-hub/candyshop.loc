@@ -46,6 +46,7 @@ Route::prefix('/frontEdit')->group(function (){
     Route::get('/deleteDiscount/{id}',[DiscountController::class,'deleteDiscount'])->name('deleteDiscount');
     Route::post('/createSliderPage',[HomePageEditController::class,'createSliderPage'])->name('createSliderPage');
     Route::get('/deleteSliderPage/{id}',[HomePageEditController::class,'deleteSliderPage'])->name('deleteSliderPage');
-
+    Route::post('/createCategory',[HomePageEditController::class,'createCategory'])->name('createCategory');
+    Route::get('/deleteCategory/{id}',[HomePageEditController::class,'deleteCategory'])->name('deleteCategory');
 
 });

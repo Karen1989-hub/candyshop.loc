@@ -40,30 +40,14 @@
 <div class="categories-shop">
     <div class="container">
         <div class="row d-flex justify-content-around">
+            @foreach($categories as $val)
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="shop-cat-box">
-                    <img class="img-fluid" src="images2/kocegar_peta_zel_veb.jpg" alt="" />
-                    <a class="btn hvr-hover" href="#">Конфеты весовые</a>
+                    <img class="img-fluid" src="images/categoriesImg/{{$val->imgName}}" alt="" />
+                    <a class="btn hvr-hover" href="#">{{$val->title}}</a>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="shop-cat-box">
-                    <img class="img-fluid" src="images2/foto.jpg" alt="" />
-                    <a class="btn hvr-hover" href="#">Конфеты фасованные</a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="shop-cat-box">
-                    <img class="img-fluid" src="images2/muzskoi_zakon.jpg" alt="" />
-                    <a class="btn hvr-hover" href="#">Новинки</a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="shop-cat-box">
-                    <img class="img-fluid" src="images2/azbuka.jpg" alt="" />
-                    <a class="btn hvr-hover" href="#">Хиты</a>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>

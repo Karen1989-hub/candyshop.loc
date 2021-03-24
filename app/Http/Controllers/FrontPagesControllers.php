@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\Discount;
 use App\Models\HomePageSlider;
+use App\Models\Category;
 
 
 class FrontPagesControllers extends Controller
@@ -14,9 +15,12 @@ class FrontPagesControllers extends Controller
         $frontPageName = 'home';
         $discount = Discount::all();
         $homePageSlider = HomePageSlider::all();
+        $categories = Category::all();
         $arr = ['frontPageName'=>$frontPageName,
                 'discount'=>$discount,
-                'homePageSlider'=>$homePageSlider];
+                'homePageSlider'=>$homePageSlider,
+                'categories' => $categories
+            ];
         return view('front.home',$arr);
     }
     public function getShopPage(){

@@ -24,15 +24,13 @@
                     <div class="card-body">
                         <div class="form-group row">
                             <label class="form-label">Загаловок</label>
-                            <input type="text" class="form-control" name="title" placeholder="Текст...">
+                            <input type="text" class="form-control" name="address" placeholder="Текст...">
                             @if($errors->has('title')) <span style="color: red">{{$errors->first()}}</span> @endif
                             <label class="form-label">Текст </label>
-                            <input type="text" class="form-control" name="text" placeholder="Текст...">
+                            <input type="text" class="form-control" name="phone" placeholder="Текст...">
                             @if($errors->has('text')) <span style="color: red">{{$errors->first()}}</span> @endif
-                            <div class="col-lg-4 col-sm-12 mt-5" style="margin: 0 auto">
-                                <input type="file" name="uploadImg" class="dropify" data-height="180"/>
-                                @if($errors->has('uploadImg')) <span style="color: red">{{$errors->first()}}</span> @endif
-                            </div>
+                            <input type="text" class="form-control" name="email" placeholder="Текст...">
+                            @if($errors->has('text')) <span style="color: red">{{$errors->first()}}</span> @endif,
                         </div>
                     </div>
                     <div class="card-footer text-right">

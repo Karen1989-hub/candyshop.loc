@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\Discount;
 use App\Models\HomePageSlider;
+use App\Models\Category;
 
 class AdminPagesController extends Controller
 {
@@ -47,7 +48,11 @@ class AdminPagesController extends Controller
         if ($adminKey == 'ak587238') {
             $pageCategory = "b";
             $pageNumber = "b2";
-            $arr = ['pageNumber' => $pageNumber, 'pageCategory' => $pageCategory];
+            $categories = Category::all();
+            $arr = ['pageNumber' => $pageNumber,
+                    'pageCategory' => $pageCategory,
+                    'categories' => $categories
+                ];
             return view('admin.editProduktCategory', $arr);
         } else {
             return abort('404');
