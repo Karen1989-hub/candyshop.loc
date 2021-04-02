@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
 use App\Models\HomePageSlider;
+use App\Models\ContactData;
 use Validator;
 
 
@@ -117,6 +118,43 @@ class HomePageEditController extends Controller
 
             Category::destroy($id);
             return redirect()->route('getEditProduktCategory');
+        } else {
+            return abort('404');
+        }
+    }
+
+    public function editContactData(Request $request)
+    {
+        $adminKey = Cookie::get('adminKey');
+        if ($adminKey == 'ak587238') {
+            $adress = $request->input('address');
+            $phone = $request->input('phone');
+            $email = $request->input('email');
+
+            $validator = Validator::make($request->all(),
+            [
+                'address' => 'required | max:50',
+                'phone' => 'required | max:30',
+                'email' => 'required | max:30'
+            ],[
+                'address.required' => 'поле должно быт заполненно',
+                'address.max' => 'поле должно быть не больше 50 синволов',
+                'phone.required' => 'поле должно быт заполненно',
+                'phone.max' => 'поле должно быть не больше 30 синволов',
+                'email.required' => 'поле должно быт заполненно',
+                'email.max' => 'поле должно быть не больше 30 синволов'
+                ]);
+            if($validator->fails()){
+                return back()->withErrors($validator)->withInput();
+            }
+
+            $update = ContactData::find(1);
+            $update->adress = $adress;
+            $update->phone = $phone;
+            $update->email = $email;
+            $update->save();
+
+            return redirect()->route('getEditContactData');
         } else {
             return abort('404');
         }

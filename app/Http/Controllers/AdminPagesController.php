@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Cookie;
 use App\Models\Discount;
 use App\Models\HomePageSlider;
 use App\Models\Category;
+use App\Models\ContactData;
 
 class AdminPagesController extends Controller
 {
@@ -64,7 +65,11 @@ class AdminPagesController extends Controller
         if ($adminKey == 'ak587238') {
             $pageCategory = "b";
             $pageNumber = "b3";
-            $arr = ['pageNumber' => $pageNumber, 'pageCategory' => $pageCategory];
+            $contactData = ContactData::first();
+            $arr = ['pageNumber' => $pageNumber,
+                    'pageCategory' => $pageCategory,
+                    'contactData' => $contactData
+                ];
             return view('admin.editContactData', $arr);
         } else {
             return abort('404');

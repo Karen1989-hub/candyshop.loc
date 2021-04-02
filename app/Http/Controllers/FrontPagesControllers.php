@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Cookie;
 use App\Models\Discount;
 use App\Models\HomePageSlider;
 use App\Models\Category;
+use App\Models\ContactData;
 
 
 class FrontPagesControllers extends Controller
@@ -16,10 +17,12 @@ class FrontPagesControllers extends Controller
         $discount = Discount::all();
         $homePageSlider = HomePageSlider::all();
         $categories = Category::all();
+        $contactData = ContactData::where('id',1)->get();
         $arr = ['frontPageName'=>$frontPageName,
                 'discount'=>$discount,
                 'homePageSlider'=>$homePageSlider,
-                'categories' => $categories
+                'categories' => $categories,
+                'contactData' => $contactData
             ];
         return view('front.home',$arr);
     }
