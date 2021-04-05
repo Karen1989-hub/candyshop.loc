@@ -28,12 +28,18 @@ class FrontPagesControllers extends Controller
     }
     public function getShopPage(){
         $frontPageName = 'shop';
-        $arr = ['frontPageName'=>$frontPageName];
+        $discount = Discount::all();
+        $arr = ['frontPageName'=>$frontPageName,
+                'discount'=>$discount];
         return view('front.shop',$arr);
     }
     public function getAboutUsPage(){
         $frontPageName = 'about';
-        $arr = ['frontPageName'=>$frontPageName];
+        $discount = Discount::all();
+        $contactData = ContactData::where('id',1)->get();
+        $arr = ['frontPageName'=>$frontPageName,
+                'discount'=>$discount,
+                'contactData'=>$contactData];
         return view('front.aboutUs',$arr);
     }
     public function getАwardsPage(){

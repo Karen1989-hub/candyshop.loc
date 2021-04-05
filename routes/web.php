@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\AdminPagesController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\HomePageEditController;
+use App\Http\Controllers\AboutCompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,6 @@ Route::prefix('/frontEdit')->group(function (){
     Route::post('/createCategory',[HomePageEditController::class,'createCategory'])->name('createCategory');
     Route::get('/deleteCategory/{id}',[HomePageEditController::class,'deleteCategory'])->name('deleteCategory');
     Route::post('/editContactData',[HomePageEditController::class,'editContactData'])->name('editContactData');
-
+    Route::post('/updaetCompanyInfo',[AboutCompanyController::class,'updaetCompanyInfo'])->name('updaetCompanyInfo');
 
 });
