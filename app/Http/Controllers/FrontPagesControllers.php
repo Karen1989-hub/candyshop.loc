@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AboutCompany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\Discount;
@@ -37,9 +38,12 @@ class FrontPagesControllers extends Controller
         $frontPageName = 'about';
         $discount = Discount::all();
         $contactData = ContactData::where('id',1)->get();
+        $aboutCompany = AboutCompany::first();
         $arr = ['frontPageName'=>$frontPageName,
                 'discount'=>$discount,
-                'contactData'=>$contactData];
+                'contactData'=>$contactData,
+                'aboutCompany'=>$aboutCompany
+            ];
         return view('front.aboutUs',$arr);
     }
     public function getАwardsPage(){

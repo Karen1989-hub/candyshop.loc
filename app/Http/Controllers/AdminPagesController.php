@@ -8,6 +8,7 @@ use App\Models\Discount;
 use App\Models\HomePageSlider;
 use App\Models\Category;
 use App\Models\ContactData;
+use App\Models\AboutCompany;
 
 class AdminPagesController extends Controller
 {
@@ -105,8 +106,11 @@ class AdminPagesController extends Controller
         if ($adminKey == 'ak587238') {
             $pageCategory = "aboutUs";
             $pageNumber = "aboutUs_1";
-            $arr = ['pageNumber' => $pageNumber, 'pageCategory' => $pageCategory];
-            return view('admin.editCompanyinfo', $arr);
+            $companyInfo = AboutCompany::first();
+            $arr = ['pageNumber' => $pageNumber,
+                    'pageCategory' => $pageCategory,
+                    'companyInfo' => $companyInfo];
+            return view('admin.editCompanyInfo', $arr);
         } else {
             return abort('404');
         }
