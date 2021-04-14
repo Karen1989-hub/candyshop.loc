@@ -8,11 +8,6 @@ use App\Models\Employee;
 use Illuminate\Support\Facades\Cookie;
 use Validator;
 
-//        $adminKey= Cookie::get('adminKey');
-//        if ($adminKey == 'ak587238') {
-//        } else {
-//            return abort('404');
-//        }
 
 class AboutCompanyController extends Controller
 {

@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminPagesController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\HomePageEditController;
 use App\Http\Controllers\AboutCompanyController;
+use App\Http\Controllers\ShopPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,5 +54,5 @@ Route::prefix('/frontEdit')->group(function (){
     Route::post('/updaetCompanyInfo',[AboutCompanyController::class,'updaetCompanyInfo'])->name('updaetCompanyInfo');
     Route::post('/createNewEmployee',[AboutCompanyController::class,'createNewEmployee'])->name('createNewEmployee');
     Route::get('/deleteEmployee/{id}',[AboutCompanyController::class,'deleteEmployee'])->name('deleteEmployee');
-
+    Route::post('/createProduct',[ShopPageController::class,'createProduct'])->name('createProduct');
 });
