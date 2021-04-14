@@ -9,6 +9,7 @@ use App\Models\Discount;
 use App\Models\HomePageSlider;
 use App\Models\Category;
 use App\Models\ContactData;
+use App\Models\Employee;
 
 
 class FrontPagesControllers extends Controller
@@ -30,8 +31,10 @@ class FrontPagesControllers extends Controller
     public function getShopPage(){
         $frontPageName = 'shop';
         $discount = Discount::all();
+        $contactData = ContactData::where('id',1)->get();
         $arr = ['frontPageName'=>$frontPageName,
-                'discount'=>$discount];
+                'discount'=>$discount,
+                'contactData' => $contactData];
         return view('front.shop',$arr);
     }
     public function getAboutUsPage(){
@@ -39,16 +42,22 @@ class FrontPagesControllers extends Controller
         $discount = Discount::all();
         $contactData = ContactData::where('id',1)->get();
         $aboutCompany = AboutCompany::first();
+        $employees = Employee::all();
         $arr = ['frontPageName'=>$frontPageName,
                 'discount'=>$discount,
                 'contactData'=>$contactData,
-                'aboutCompany'=>$aboutCompany
+                'aboutCompany'=>$aboutCompany,
+                'employees'=>$employees
             ];
         return view('front.aboutUs',$arr);
     }
     public function getАwardsPage(){
         $frontPageName = 'about';
-        $arr = ['frontPageName'=>$frontPageName];
+        $discount = Discount::all();
+        $contactData = ContactData::where('id',1)->get();
+        $arr = ['frontPageName'=>$frontPageName,
+                'discount'=>$discount,
+                'contactData'=>$contactData];
         return view('front.awards',$arr);
     }
     public function getNewsPage(){

@@ -9,6 +9,7 @@ use App\Models\HomePageSlider;
 use App\Models\Category;
 use App\Models\ContactData;
 use App\Models\AboutCompany;
+use App\Models\Employee;
 
 class AdminPagesController extends Controller
 {
@@ -121,7 +122,10 @@ class AdminPagesController extends Controller
         if ($adminKey == 'ak587238') {
             $pageCategory = "aboutUs";
             $pageNumber = "aboutUs_2";
-            $arr = ['pageNumber' => $pageNumber, 'pageCategory' => $pageCategory];
+            $employee = Employee::all();
+            $arr = ['pageNumber' => $pageNumber,
+                    'pageCategory' => $pageCategory,
+                    'employee' => $employee];
             return view('admin.editPersonalInfo', $arr);
         } else {
             return abort('404');
@@ -133,7 +137,8 @@ class AdminPagesController extends Controller
         if ($adminKey == 'ak587238') {
             $pageCategory = "awards";
             $pageNumber = "awards_1";
-            $arr = ['pageNumber' => $pageNumber, 'pageCategory' => $pageCategory];
+            $arr = ['pageNumber' => $pageNumber,
+                    'pageCategory' => $pageCategory];
             return view('admin.editPersonalInfo', $arr);
         } else {
             return abort('404');

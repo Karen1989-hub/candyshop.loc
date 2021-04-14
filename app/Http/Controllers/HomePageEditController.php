@@ -93,7 +93,7 @@ class HomePageEditController extends Controller
                 return back()->withErrors($validator)->withInput();
             }
             Category::create([
-                'title' => $title
+                'title' => $title,
             ]);
 
             $maxId = Category::max('id');

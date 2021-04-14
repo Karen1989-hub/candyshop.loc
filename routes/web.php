@@ -52,4 +52,6 @@ Route::prefix('/frontEdit')->group(function (){
     Route::post('/editContactData',[HomePageEditController::class,'editContactData'])->name('editContactData');
     Route::post('/updaetCompanyInfo',[AboutCompanyController::class,'updaetCompanyInfo'])->name('updaetCompanyInfo');
     Route::post('/createNewEmployee',[AboutCompanyController::class,'createNewEmployee'])->name('createNewEmployee');
+    Route::get('/deleteEmployee/{id}',[AboutCompanyController::class,'deleteEmployee'])->name('deleteEmployee');
+
 });

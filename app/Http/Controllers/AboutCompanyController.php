@@ -16,33 +16,34 @@ use Validator;
 
 class AboutCompanyController extends Controller
 {
-    public function updaetCompanyInfo(Request $request){
-        $adminKey= Cookie::get('adminKey');
+    public function updaetCompanyInfo(Request $request)
+    {
+        $adminKey = Cookie::get('adminKey');
         if ($adminKey == 'ak587238') {
             $title = $request->input('title');
             $text = $request->input('text');
             $file = $request->file('uploadImg');
 
             $validator = Validator::make($request->all(),
-            ['title' => 'required | max:50',
-             'text' => 'required | max:1000',
-             'uploadImg' => 'required'
-             ],
-             [
-              'title.required' => 'поле должно быт заполненно',
-              'title.max' => 'поле должно быть не больше 50 синволов',
-              'text.required' => 'поле должно быт заполненно',
-              'text.max' => 'поле должно быть не больше 1000 синволов',
-              'uploadImg.required' => 'поле должно быт заполненно'
-             ]
+                ['title' => 'required | max:50',
+                    'text' => 'required | max:1000',
+                    'uploadImg' => 'required'
+                ],
+                [
+                    'title.required' => 'поле должно быт заполненно',
+                    'title.max' => 'поле должно быть не больше 50 синволов',
+                    'text.required' => 'поле должно быт заполненно',
+                    'text.max' => 'поле должно быть не больше 1000 синволов',
+                    'uploadImg.required' => 'поле должно быт заполненно'
+                ]
             );
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
             }
 
             $images = glob('images/aboutCompanyImg/*');
-            foreach($images as $file){
-                if(is_file($file)) {
+            foreach ($images as $file) {
+                if (is_file($file)) {
                     unlink($file);
                 }
             }
@@ -61,32 +62,53 @@ class AboutCompanyController extends Controller
         }
 
     }
-    public function createNewEmployee(Request $request){
-        $adminKey= Cookie::get('adminKey');
+
+    public function createNewEmployee(Request $request)
+    {
+        $adminKey = Cookie::get('adminKey');
         if ($adminKey == 'ak587238') {
             $name = $request->input('name');
             $position = $request->input('position');
             $file = $request->file('uploadImg');
+            $imgName = $file->getClientOriginalName();
 
-            $validator = Valdator::make($request->all(),
-                ['title' => 'required | max:50',
-                    'text' => 'required | max:1000',
+            $validator = Validator::make($request->all(),
+                ['name' => 'required | max:50',
+                    'position' => 'required | max:1000',
                     'uploadImg' => 'required'
-                ],[
-                    'title.required' => 'поле должно быт заполненно',
-                    'title.max' => 'поле должно быть не больше 50 синволов',
-                    'text.required' => 'поле должно быт заполненно',
-                    'text.max' => 'поле должно быть не больше 1000 синволов',
+                ], [
+                    'name.required' => 'поле должно быт заполненно',
+                    'name.max' => 'поле должно быть не больше 50 синволов',
+                    'position.required' => 'поле должно быт заполненно',
+                    'position.max' => 'поле должно быть не больше 1000 синволов',
                     'uploadImg.required' => 'поле должно быт заполненно'
                 ]);
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
             }
 
+            $file->move('images/employeesImg', $file->getClientOriginalName());
+
+            Employee::create(['name' => $name, 'position' => $position, 'imgName' => $imgName]);
+
             return redirect()->route('getEditPersonalInfo');
         } else {
             return abort('404');
         }
+    }
+
+    public function deleteEmployee($id)
+    {
+        $adminKey = Cookie::get('adminKey');
+        if ($adminKey == 'ak587238') {
+           $obj = Employee::where('id',$id)->get();
+            unlink('images/employeesImg/'.$obj[0]->imgName);
+            Employee::destroy($id);
+            return redirect()->route('getEditPersonalInfo');
+        } else {
+            return abort('404');
+        }
+
     }
 
 }

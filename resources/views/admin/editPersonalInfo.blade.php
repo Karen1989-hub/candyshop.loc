@@ -44,6 +44,41 @@
             </div>
         </div>
         <!--kontent end-->
+        <!--table start-->
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Список сотрудников</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table card-table table-vcenter text-nowrap">
+                            <thead>
+                            <tr>
+                                <th>N.</th>
+                                <th>Имя и Фамилие</th>
+                                <th>Должнасть</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $n=0; ?>
+                             @foreach($employee as $val)
+                                <tr>
+                                    <th scope="row"><?php $n++; echo $n; ?></th>
+                                    <td>{{$val->name}}</td>
+                                    <td>{{$val->position}}</td>
+                                    <th><a href="/frontEdit/deleteEmployee/{{$val->id}}" class="btn btn-outline-danger" style="float: right">Удалит</a></th>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--table end-->
     </div>
 </div>
 
