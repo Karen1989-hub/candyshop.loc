@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\ContactData;
 use App\Models\AboutCompany;
 use App\Models\Employee;
+use App\Models\Product;
 
 class AdminPagesController extends Controller
 {
@@ -95,7 +96,10 @@ class AdminPagesController extends Controller
         if ($adminKey == 'ak587238') {
             $pageCategory = "shop";
             $pageNumber = "shop_2";
-            $arr = ['pageNumber' => $pageNumber, 'pageCategory' => $pageCategory];
+            $products = Product::all();
+            $arr = ['pageNumber' => $pageNumber,
+                    'pageCategory' => $pageCategory,
+                    'products' => $products];
             return view('admin.deleteOrEditProduct', $arr);
         } else {
             return abort('404');

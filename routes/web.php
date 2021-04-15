@@ -55,4 +55,5 @@ Route::prefix('/frontEdit')->group(function (){
     Route::post('/createNewEmployee',[AboutCompanyController::class,'createNewEmployee'])->name('createNewEmployee');
     Route::get('/deleteEmployee/{id}',[AboutCompanyController::class,'deleteEmployee'])->name('deleteEmployee');
     Route::post('/createProduct',[ShopPageController::class,'createProduct'])->name('createProduct');
+    Route::post('/deleteOrEditProduct',[ShopPageController::class,'deleteOrEditProduct'])->name('deleteOrEditProduct');
 });

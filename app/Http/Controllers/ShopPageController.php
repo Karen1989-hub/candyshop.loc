@@ -58,4 +58,14 @@ class ShopPageController extends Controller
         }
 
     }
+
+    public function deleteOrEditProduct()
+    {
+        $adminKey = Cookie::get('adminKey');
+        if ($adminKey == 'ak587238') {
+
+        } else {
+            return abort('404');
+        }
+    }
 }

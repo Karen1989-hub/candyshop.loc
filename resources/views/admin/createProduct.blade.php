@@ -30,6 +30,21 @@
                             <input type="number" class="form-control" name="price" value=""
                                    placeholder="Текст...">
                             @if($errors->has('price')) <span style="color: red">{{$errors->first()}}</span> @endif
+                            <label class="form-label">Мера изчесления</label>
+                            <select name="calculateType" id="select-countries2" class="form-control select2 custom-select">
+                                <option value="Конфеты весовые"
+                                        data-data='{"image": "https://laravel.spruko.com/adminor/Leftmenu-Icon-DarkSidebar-Dark/assets/images/flags/br.svg"}'>
+                                    1 штука
+                                </option>
+                                <option value="Конфеты Фасованные"
+                                        data-data='{"image": "https://laravel.spruko.com/adminor/Leftmenu-Icon-DarkSidebar-Dark/assets/images/flags/cz.svg"}'>
+                                    100 гр
+                                </option>
+                                <option value="Новинки"
+                                        data-data='{"image": "https://laravel.spruko.com/adminor/Leftmenu-Icon-DarkSidebar-Dark/assets/images/flags/de.svg"}'>
+                                    1 кг
+                                </option>
+                            </select>
                             <div class="form-group">
                                 <label class="form-label">Категория продукта</label>
                                 <select name="category" id="select-countries" class="form-control select2 custom-select">
