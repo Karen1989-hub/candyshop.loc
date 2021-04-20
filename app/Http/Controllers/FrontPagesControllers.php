@@ -10,6 +10,7 @@ use App\Models\HomePageSlider;
 use App\Models\Category;
 use App\Models\ContactData;
 use App\Models\Employee;
+use App\Models\Product;
 
 
 class FrontPagesControllers extends Controller
@@ -28,15 +29,45 @@ class FrontPagesControllers extends Controller
             ];
         return view('front.home',$arr);
     }
-    public function getShopPage(){
+    public function getShopPage($category = "all"){
+
+//        $row = Category::all();
+//        foreach ($row as $val){
+//            dump($val->title);
+//            dump($val->getProductCount());
+//        }
+
         $frontPageName = 'shop';
         $discount = Discount::all();
         $contactData = ContactData::where('id',1)->get();
+        $categories = Category::all();
+        if($category == "all"){
+            $products = Product::all();
+        } else {
+            $products = Product::where('category',$category)->get();
+        }
         $arr = ['frontPageName'=>$frontPageName,
                 'discount'=>$discount,
-                'contactData' => $contactData];
+                'contactData' => $contactData,
+                'products'=>$products,
+                'categories'=>$categories];
         return view('front.shop',$arr);
     }
+
+    public function getDetailShopPage($id){
+
+        $frontPageName = 'shop';
+        $discount = Discount::all();
+        $contactData = ContactData::where('id',1)->get();
+        $singlProduct = Product::where('id',$id)->get();
+
+        $arr = ['frontPageName'=>$frontPageName,
+            'discount'=>$discount,
+            'contactData' => $contactData,
+            'singlProduct'=>$singlProduct];
+        return view('front.shopDetail',$arr);
+    }
+
     public function getAboutUsPage(){
         $frontPageName = 'about';
         $discount = Discount::all();

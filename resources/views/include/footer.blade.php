@@ -4,52 +4,52 @@
     <div class="main-instagram owl-carousel owl-theme">
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images2/rewards/foto-1006-min.jpg" alt="" />
+                <img src="{{asset('images2/rewards/foto-1006-min.jpg')}}" alt="" />
             </div>
         </div>
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images2/rewards/foto-1010-min.jpg" alt="" />
+                <img src="{{asset('images2/rewards/foto-1010-min.jpg')}}" alt="" />
             </div>
         </div>
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images2/rewards/foto-1012-min.jpg" alt="" />
+                <img src="{{asset('images2/rewards/foto-1012-min.jpg')}}" alt="" />
             </div>
         </div>
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images2/rewards/foto-1013-min.jpg" alt="" />
+                <img src="{{asset('images2/rewards/foto-1013-min.jpg')}}" alt="" />
             </div>
         </div>
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images2/rewards/foto-1014-min.jpg" alt="" />
+                <img src="{{asset('images2/rewards/foto-1014-min.jpg')}}" alt="" />
             </div>
         </div>
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images2/rewards/foto-1015-min.jpg" alt="" />
+                <img src="{{asset('images2/rewards/foto-1015-min.jpg')}}" alt="" />
             </div>
         </div>
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images2/rewards/foto-1016-min.jpg" alt="" />
+                <img src="{{asset('images2/rewards/foto-1016-min.jpg')}}" alt="" />
             </div>
         </div>
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images2/rewards/foto-1021-min.jpg" alt="" />
+                <img src="{{asset('images2/rewards/foto-1021-min.jpg')}}" alt="" />
             </div>
         </div>
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images2/rewards/foto-1022-min.jpg" alt="" />
+                <img src="{{asset('images2/rewards/foto-1022-min.jpg')}}" alt="" />
             </div>
         </div>
         <div class="item">
             <div class="ins-inner-box">
-                <img src="images2/rewards/foto-1026-min.jpg" alt="" />
+                <img src="{{asset('images2/rewards/foto-1026-min.jpg')}}" alt="" />
             </div>
         </div>
     </div>
@@ -123,21 +123,21 @@
 <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 
 <!-- ALL JS FILES -->
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
+<script src="{{asset('js/popper.min.js')}}"></script>
+<script src="{{asset('js/bootstrap.min.js')}}"></script>
 <!-- ALL PLUGINS -->
-<script src="js/jquery.superslides.min.js"></script>
-<script src="js/bootstrap-select.js"></script>
-<script src="js/inewsticker.js"></script>
-<script src="js/bootsnav.js."></script>
-<script src="js/images-loded.min.js"></script>
-<script src="js/isotope.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/baguetteBox.min.js"></script>
-<script src="js/form-validator.min.js"></script>
-<script src="js/contact-form-script.js"></script>
-<script src="js/custom.js"></script>
+<script src="{{asset('js/jquery.superslides.min.js')}}"></script>
+<script src="{{asset('js/bootstrap-select.js')}}"></script>
+<script src="{{asset('js/inewsticker.js')}}"></script>
+<script src="{{asset('js/bootsnav.js')}}"></script>
+<script src="{{asset('js/images-loded.min.js')}}"></script>
+<script src="{{asset('js/isotope.min.js')}}"></script>
+<script src="{{asset('js/owl.carousel.min.js')}}"></script>
+<script src="{{asset('js/baguetteBox.min.js')}}"></script>
+<script src="{{asset('js/form-validator.min.js')}}"></script>
+<script src="{{asset('js/contact-form-script.js')}}"></script>
+<script src="{{asset('js/custom.js')}}"></script>
 </body>
 
 </html>

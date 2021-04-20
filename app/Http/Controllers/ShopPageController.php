@@ -17,52 +17,66 @@ class ShopPageController extends Controller
 {
     public function createProduct(Request $request)
     {
-        $adminKey = Cookie::get('adminKey');
-        if ($adminKey == 'ak587238') {
-            $title = $request->input('title');
-            $price = $request->input('price');
-            $category = $request->input('category');
-            $text = $request->input('text');
-            $file = $request->file('uploadImg');
 
-            $validator = Validator::make($request->all(),
-                ['title' => 'required|max:50',
-                    'price' => 'required',
-                    'text' => 'required|max:2000',
-                    'uploadImg' => 'required'],
-                [
-                    'title.required' => 'поле должно быт заполненно',
-                    'title.max' => 'поле должно быть не больше 50 синволов',
-                    'price.required' => 'поле должно быт заполненно',
-                    'text.required' => 'поле должно быт заполненно',
-                    'text.max' => 'поле должно быть не больше 2000 синволов',
-                    'uploadImg.required' => 'поле должно быт заполненно'
-                ]
-            );
+        $title = $request->input('title');
+        $price = $request->input('price');
+        $calculateType = $request->input('calculateType');
+        $category = $request->input('category');
+        $text = $request->input('description');
+        $file = $request->file('uploadImg');
 
-            if ($validator->fails()) {
-                return back()->withErrors($validator)->withInput();
-            }
 
-            Product::create(['title' => $title, 'price' => $price, 'category' => $category, 'text' => $text]);
+        $validator = Validator::make($request->all(),
+            ['title' => 'required|max:50',
+                'price' => 'required',
+                'description' => 'required|max:2000',
+                'uploadImg' => 'required'],
+            [
+                'title.required' => 'поле должно быт заполненно',
+                'title.max' => 'поле должно быть не больше 50 синволов',
+                'price.required' => 'поле должно быт заполненно',
+                'description.required' => 'поле должно быт заполненно',
+                'description.max' => 'поле должно быть не больше 2000 синволов',
+                'uploadImg.required' => 'поле должно быт заполненно'
+            ]
+        );
 
-            $maxId = Product::max('id');
-            $file->move('images/productsImg', $maxId . ".jpg");
-            $update = Product::find($maxId);
-            $update->imgName = $maxId . ".jpg";
-            $update->save();
-
-            return back();
-        } else {
-            return abort('404');
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
         }
+
+        Product::create(['title' => $title, 'price' => $price, 'calculateType' => $calculateType, 'category' => $category, 'description' => $text]);
+
+        $maxId = Product::max('id');
+        $file->move('images/productsImg', $maxId . ".jpg");
+        $update = Product::find($maxId);
+        $update->imgName = $maxId . ".jpg";
+        $update->save();
+
+        return back();
 
     }
 
-    public function deleteOrEditProduct()
+    public function deleteProduct($id)
+    {
+        $deletedProduct = Product::where('id',$id)->get();
+        $imgName = $deletedProduct[0]->imgName;
+        unlink('images/productsImg/'.$imgName);
+        Product::destroy($id);
+
+        return back();
+    }
+
+    public function editProductPrice(Request $request)
     {
         $adminKey = Cookie::get('adminKey');
         if ($adminKey == 'ak587238') {
+            $productId = $request->input('productId');
+            $price = $request->input('price');
+            $update = Product::find($productId);
+            $update->price = $price;
+            $update->save();
+            return back();
 
         } else {
             return abort('404');

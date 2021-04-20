@@ -84,7 +84,9 @@ class AdminPagesController extends Controller
         if ($adminKey == 'ak587238') {
             $pageCategory = "shop";
             $pageNumber = "shop_1";
-            $arr = ['pageNumber' => $pageNumber, 'pageCategory' => $pageCategory];
+            $categories = Category::all();
+            $arr = ['pageNumber' => $pageNumber, 'pageCategory' => $pageCategory,
+                'categories'=>$categories];
             return view('admin.createProduct', $arr);
         } else {
             return abort('404');

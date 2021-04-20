@@ -22,6 +22,9 @@ use App\Http\Controllers\ShopPageController;
 Route::fallback(function (){return abort('404');});
 Route::get('/',[FrontPagesControllers::class,'getHomePage'])->name('home');
 Route::get('/shop',[FrontPagesControllers::class,'getShopPage'])->name('shop');
+Route::get('/shop/{category}',[FrontPagesControllers::class,'getShopPage']);
+Route::get('/shopDetail/{id}',[FrontPagesControllers::class,'getDetailShopPage']);
+
 Route::get('/aboutUs',[FrontPagesControllers::class,'getAboutUsPage'])->name('aboutUs');
 Route::get('/awards',[FrontPagesControllers::class,'getАwardsPage'])->name('awards');
 Route::get('/news',[FrontPagesControllers::class,'getNewsPage'])->name('news');
@@ -55,5 +58,11 @@ Route::prefix('/frontEdit')->group(function (){
     Route::post('/createNewEmployee',[AboutCompanyController::class,'createNewEmployee'])->name('createNewEmployee');
     Route::get('/deleteEmployee/{id}',[AboutCompanyController::class,'deleteEmployee'])->name('deleteEmployee');
     Route::post('/createProduct',[ShopPageController::class,'createProduct'])->name('createProduct');
-    Route::post('/deleteOrEditProduct',[ShopPageController::class,'deleteOrEditProduct'])->name('deleteOrEditProduct');
+    Route::get('/deleteProduct/{id}',[ShopPageController::class,'deleteProduct'])->name('deleteProduct');
+    Route::post('/editProductPrice',[ShopPageController::class,'editProductPrice'])->name('editProductPrice');
+
+
+
 });
+
+

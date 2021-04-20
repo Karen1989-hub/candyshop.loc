@@ -37,14 +37,19 @@
                                 </thead>
                                 <tbody>
                                 @foreach($products as $val)
-                                <tr class="border-top-0">
-                                    <td>{{$val->id}}</td>
-                                    <td>{{$val->title}}</td>
-                                    <td>{{$val->category}}</td>
-                                    <td><input type="text" class="form-control" name="example-text-input" value="{{$val->price}}"></td>
-                                    <td><a href="#" class="btn btn-outline-warning">Сохранить</a></td>
-                                    <td><a href="#" class="btn btn-outline-danger">Удалить</a></td>
-                                </tr>
+                                    <tr class="border-top-0">
+                                        <form action="{{route('editProductPrice')}}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="productId" value="{{$val->id}}">
+                                        <td>{{$val->id}}</td>
+                                        <td>{{$val->title}}</td>
+                                        <td>{{$val->category}}</td>
+                                            <td><input type="text" class="form-control" name="price" value="{{$val->price}}"></td>
+                                            <td>{{$val->calculateType}}</td>
+                                            <td><button type="submit" class="btn btn-outline-warning">Сохранить</button></td>
+                                        </form>
+                                        <td><a href="/frontEdit/deleteProduct/{{$val->id}}" class="btn btn-outline-danger">Удалить</a></td>
+                                    </tr>
                                 @endforeach
                                 </tbody>
                             </table>

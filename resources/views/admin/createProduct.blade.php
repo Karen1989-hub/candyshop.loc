@@ -32,15 +32,15 @@
                             @if($errors->has('price')) <span style="color: red">{{$errors->first()}}</span> @endif
                             <label class="form-label">Мера изчесления</label>
                             <select name="calculateType" id="select-countries2" class="form-control select2 custom-select">
-                                <option value="Конфеты весовые"
+                                <option value="1 штука"
                                         data-data='{"image": "https://laravel.spruko.com/adminor/Leftmenu-Icon-DarkSidebar-Dark/assets/images/flags/br.svg"}'>
                                     1 штука
                                 </option>
-                                <option value="Конфеты Фасованные"
+                                <option value="100 гр"
                                         data-data='{"image": "https://laravel.spruko.com/adminor/Leftmenu-Icon-DarkSidebar-Dark/assets/images/flags/cz.svg"}'>
                                     100 гр
                                 </option>
-                                <option value="Новинки"
+                                <option value="1 кг"
                                         data-data='{"image": "https://laravel.spruko.com/adminor/Leftmenu-Icon-DarkSidebar-Dark/assets/images/flags/de.svg"}'>
                                     1 кг
                                 </option>
@@ -48,27 +48,17 @@
                             <div class="form-group">
                                 <label class="form-label">Категория продукта</label>
                                 <select name="category" id="select-countries" class="form-control select2 custom-select">
-                                    <option value="Конфеты весовые"
+                                    @foreach($categories as $val)
+                                    <option value="{{$val->id}}"
                                             data-data='{"image": "https://laravel.spruko.com/adminor/Leftmenu-Icon-DarkSidebar-Dark/assets/images/flags/br.svg"}'>
-                                        Конфеты весовые
+                                        {{$val->title}}
                                     </option>
-                                    <option value="Конфеты Фасованные"
-                                            data-data='{"image": "https://laravel.spruko.com/adminor/Leftmenu-Icon-DarkSidebar-Dark/assets/images/flags/cz.svg"}'>
-                                        Конфеты Фасованные
-                                    </option>
-                                    <option value="Новинки"
-                                            data-data='{"image": "https://laravel.spruko.com/adminor/Leftmenu-Icon-DarkSidebar-Dark/assets/images/flags/de.svg"}'>
-                                        Новинки
-                                    </option>
-                                    <option value="Хиты"
-                                            data-data='{"image": "https://laravel.spruko.com/adminor/Leftmenu-Icon-DarkSidebar-Dark/assets/images/flags/pl.svg"}'
-                                            selected>Хиты
-                                    </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <label class="form-label">Описание продукта<span
                                     class="form-label-small ml-3"></span></label>
-                            <textarea class="form-control" name="text" rows="7" placeholder="Текст..."></textarea>
+                            <textarea class="form-control" name="description" rows="7" placeholder="Текст..."></textarea>
                             @if($errors->has('text')) <span style="color: red">{{$errors->first()}}</span> @endif
                             <div class="col-lg-4 col-sm-12 mt-5" style="margin: 0 auto">
                                 <input type="file" name="uploadImg" class="dropify" data-height="180"/>
