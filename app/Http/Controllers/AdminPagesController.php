@@ -145,7 +145,20 @@ class AdminPagesController extends Controller
             $pageNumber = "awards_1";
             $arr = ['pageNumber' => $pageNumber,
                     'pageCategory' => $pageCategory];
-            return view('admin.editPersonalInfo', $arr);
+            return view('admin.editAwards', $arr);
+        } else {
+            return abort('404');
+        }
+    }
+
+    public function getEditNews(){
+        $adminKey = Cookie::get('adminKey');
+        if ($adminKey == 'ak587238') {
+            $pageCategory = "news";
+            $pageNumber = "news_1";
+            $arr = ['pageNumber' => $pageNumber,
+                'pageCategory' => $pageCategory];
+            return view('admin.editNews', $arr);
         } else {
             return abort('404');
         }

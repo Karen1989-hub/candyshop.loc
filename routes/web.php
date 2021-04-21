@@ -43,7 +43,7 @@ Route::prefix('/admin')->group(function (){
     Route::get('/getEditCompanyInfo',[AdminPagesController::class,'getEditCompanyInfo'])->name('getEditCompanyInfo');
     Route::get('/getEditPersonalInfo',[AdminPagesController::class,'getEditPersonalInfo'])->name('getEditPersonalInfo');
     Route::get('/getEditAwards',[AdminPagesController::class,'getEditAwards'])->name('getEditAwards');
-
+    Route::get('/getEditNews',[AdminLoginController::class,'getEditNews'])->name('getEditNews');
 });
 
 Route::prefix('/frontEdit')->group(function (){

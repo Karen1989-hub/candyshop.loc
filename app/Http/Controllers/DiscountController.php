@@ -49,7 +49,7 @@ class DiscountController extends Controller
         if ($adminKey == 'ak587238') {
 
             Discount::destroy($id);
-            //return redirect()->route('getDiscountsPage');
+            return redirect()->route('getDiscountsPage');
         } else {
             return abort('404');
         }
