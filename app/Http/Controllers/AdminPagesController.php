@@ -128,4 +128,20 @@ class AdminPagesController extends Controller
         return view('admin.retailОrders',$arr);
     }
 
+    public function getWholesalerOrdersList(){
+        $pageCategory = "wholesalerOrders";
+        $pageNumber = "wholesalerOrdersList";
+        $arr = ['pageNumber' => $pageNumber,
+            'pageCategory' => $pageCategory];
+        return view('admin.wholesalerОrders',$arr);
+    }
+
+    public function getWholesalersRegistration(){
+        $pageCategory = "WholesalersRegistration";
+        $pageNumber = "WholesalersRegistration";
+        $arr = ['pageNumber' => $pageNumber,
+            'pageCategory' => $pageCategory];
+        return view('admin.wholesalersRegistration',$arr);
+    }
+
 }

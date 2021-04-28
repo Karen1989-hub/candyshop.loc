@@ -46,8 +46,8 @@ Route::prefix('/admin')->group(function (){
     Route::get('/getEditNews',[AdminPagesController::class,'getEditNews'])->middleware('admin')->name('getEditNews');
     Route::get('/getMessagesList',[AdminPagesController::class,'getMessagesList'])->middleware('admin')->name('getMessagesList');
     Route::get('/getRetailOrdersList',[AdminPagesController::class,'getRetailOrdersList'])->middleware('admin')->name('getRetailOrdersList');
-
-
+    Route::get('/getWholesalerOrdersList',[AdminPagesController::class,'getWholesalerOrdersList'])->middleware('admin')->name('getWholesalerOrdersList');
+    Route::get('/getWholesalersRegistration',[AdminPagesController::class,'getWholesalersRegistration'])->middleware('admin')->name('getWholesalersRegistration');
 });
 
 Route::prefix('/frontEdit')->group(function (){

@@ -93,22 +93,22 @@
             </ul>
         </li>
         <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="index-2.html#"><i
+            <a class="side-menu__item" @if($pageCategory == 'wholesalerOrders') active @endif data-toggle="slide" href="index-2.html#"><i
                     class="side-menu__icon fa fa-shopping-cart"></i><span class="side-menu__label">Заказы оптовиков</span><i
                     class="angle fa fa-angle-right"></i></a>
             <ul class="slide-menu">
-                <li>
-                    <a href="icons.html" class="slide-item">Список заказов</a>
+                <li @if($pageNumber == 'wholesalerOrdersList')class="active"@endif>
+                    <a href="{{route('getWholesalerOrdersList')}}" class="slide-item">Список заказов</a>
                 </li>
             </ul>
         </li>
         <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="index-2.html#"><i
+            <a class="side-menu__item" @if($pageCategory == 'WholesalersRegistration') active @endif data-toggle="slide" href="index-2.html#"><i
                     class="side-menu__icon fa fa-cubes"></i><span
                     class="side-menu__label">Регистрация оптовика</span><i class="angle fa fa-angle-right"></i></a>
             <ul class="slide-menu">
-                <li>
-                    <a href="login.html" class="slide-item">Добавить/удалить оптовика</a>
+                <li @if($pageNumber == 'WholesalersRegistration')class="active"@endif>
+                    <a href="{{route('getWholesalersRegistration')}}" class="slide-item">Добавить/удалить оптовика</a>
                 </li>
             </ul>
         </li>
