@@ -63,32 +63,32 @@
             </ul>
         </li>
         <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="index-2.html#"><i
+            <a class="side-menu__item" @if($pageCategory == 'news') active @endif data-toggle="slide" href="index-2.html#"><i
                     class="side-menu__icon fa fa-desktop"></i><span class="side-menu__label">Новости</span><i
                     class="angle fa fa-angle-right"></i></a>
             <ul class="slide-menu">
-                <li>
-                    <a href="profile.html" class="slide-item">Добавить/удалить новость</a>
+                <li @if($pageNumber == 'news_1')class="active"@endif>
+                    <a href="{{route('getEditNews')}}" class="slide-item">Добавить/удалить новость</a>
                 </li>
             </ul>
         </li>
         <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="index-2.html#"><i
+            <a class="side-menu__item" @if($pageCategory == 'contacts') active @endif data-toggle="slide" href="index-2.html#"><i
                     class="side-menu__icon mdi mdi-buffer"></i><span class="side-menu__label">Контакты</span><i
                     class="angle fa fa-angle-right"></i></a>
             <ul class="slide-menu">
-                <li>
-                    <a href="form-elements.html" class="slide-item">Список сообшений</a>
+                <li @if($pageNumber == 'messagesList')class="active"@endif>
+                    <a href="{{route('getMessagesList')}}" class="slide-item">Список сообшений</a>
                 </li>
             </ul>
         </li>
         <li class="slide">
-            <a class="side-menu__item" data-toggle="slide" href="index-2.html#"><i
+            <a class="side-menu__item" @if($pageCategory == 'retailOrders') active @endif data-toggle="slide" href="index-2.html#"><i
                     class="side-menu__icon fa fa-shopping-cart"></i><span class="side-menu__label">Розничные заказы</span><i
                     class="angle fa fa-angle-right"></i></a>
             <ul class="slide-menu">
-                <li>
-                    <a href="calendar.html" class="slide-item">Список заказов</a>
+                <li @if($pageNumber == 'retailOrdersList')class="active"@endif>
+                    <a href="{{route('getRetailOrdersList')}}" class="slide-item">Список заказов</a>
                 </li>
             </ul>
         </li>

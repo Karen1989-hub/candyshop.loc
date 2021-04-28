@@ -6,9 +6,9 @@ Karen
 <div class="app-content  my-3 my-md-5">
     <div class="side-app">
         <div class="page-header">
-            <h4 class="page-title">Добавить/удалит новость</h4>
+            <h4 class="page-title">Список заказов</h4>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Новости</a></li>
+                <li class="breadcrumb-item"><a href="#">Рознечные заказы</a></li>
             </ol>
         </div>
         <!--kontent start-->

@@ -14,26 +14,17 @@ use App\Models\Product;
 
 class AdminPagesController extends Controller
 {
-
-
     public function getDiscountsPage()
     {
-        $adminKey = Cookie::get('adminKey');
-        if ($adminKey == 'ak587238') {
             $pageCategory = "a";
             $pageNumber = "a1";
             $discounts = Discount::all();
             $arr = ['pageNumber' => $pageNumber, 'pageCategory' => $pageCategory ,'discounts'=>$discounts];
             return view('admin.home', $arr);
-        } else {
-            return abort('404');
-        }
     }
 
     public function getEditSliderPage()
     {
-        $adminKey = Cookie::get('adminKey');
-        if ($adminKey == 'ak587238') {
             $pageCategory = "b";
             $pageNumber = "b1";
             $homePageSlider = HomePageSlider::all();
@@ -41,15 +32,10 @@ class AdminPagesController extends Controller
                     'pageCategory' => $pageCategory,
                     'homePageSlider' => $homePageSlider];
             return view('admin.еditSlider', $arr);
-        } else {
-            return abort('404');
-        }
     }
 
     public function getEditProduktCategory()
     {
-        $adminKey = Cookie::get('adminKey');
-        if ($adminKey == 'ak587238') {
             $pageCategory = "b";
             $pageNumber = "b2";
             $categories = Category::all();
@@ -58,14 +44,9 @@ class AdminPagesController extends Controller
                     'categories' => $categories
                 ];
             return view('admin.editProduktCategory', $arr);
-        } else {
-            return abort('404');
-        }
     }
 
     public function getEditContactData(){
-        $adminKey = Cookie::get('adminKey');
-        if ($adminKey == 'ak587238') {
             $pageCategory = "b";
             $pageNumber = "b3";
             $contactData = ContactData::first();
@@ -74,28 +55,18 @@ class AdminPagesController extends Controller
                     'contactData' => $contactData
                 ];
             return view('admin.editContactData', $arr);
-        } else {
-            return abort('404');
-        }
     }
 
     public function getCreateProduct(){
-        $adminKey = Cookie::get('adminKey');
-        if ($adminKey == 'ak587238') {
             $pageCategory = "shop";
             $pageNumber = "shop_1";
             $categories = Category::all();
             $arr = ['pageNumber' => $pageNumber, 'pageCategory' => $pageCategory,
                 'categories'=>$categories];
             return view('admin.createProduct', $arr);
-        } else {
-            return abort('404');
-        }
     }
 
     public function getDeleteOrEditProduct(){
-        $adminKey = Cookie::get('adminKey');
-        if ($adminKey == 'ak587238') {
             $pageCategory = "shop";
             $pageNumber = "shop_2";
             $products = Product::all();
@@ -103,14 +74,9 @@ class AdminPagesController extends Controller
                     'pageCategory' => $pageCategory,
                     'products' => $products];
             return view('admin.deleteOrEditProduct', $arr);
-        } else {
-            return abort('404');
-        }
     }
 
     public function getEditCompanyInfo(){
-        $adminKey = Cookie::get('adminKey');
-        if ($adminKey == 'ak587238') {
             $pageCategory = "aboutUs";
             $pageNumber = "aboutUs_1";
             $companyInfo = AboutCompany::first();
@@ -118,14 +84,9 @@ class AdminPagesController extends Controller
                     'pageCategory' => $pageCategory,
                     'companyInfo' => $companyInfo];
             return view('admin.editCompanyInfo', $arr);
-        } else {
-            return abort('404');
-        }
     }
 
     public function getEditPersonalInfo(){
-        $adminKey = Cookie::get('adminKey');
-        if ($adminKey == 'ak587238') {
             $pageCategory = "aboutUs";
             $pageNumber = "aboutUs_2";
             $employee = Employee::all();
@@ -133,35 +94,38 @@ class AdminPagesController extends Controller
                     'pageCategory' => $pageCategory,
                     'employee' => $employee];
             return view('admin.editPersonalInfo', $arr);
-        } else {
-            return abort('404');
-        }
     }
 
     public function getEditAwards(){
-        $adminKey = Cookie::get('adminKey');
-        if ($adminKey == 'ak587238') {
             $pageCategory = "awards";
             $pageNumber = "awards_1";
             $arr = ['pageNumber' => $pageNumber,
                     'pageCategory' => $pageCategory];
             return view('admin.editAwards', $arr);
-        } else {
-            return abort('404');
-        }
     }
 
     public function getEditNews(){
-        $adminKey = Cookie::get('adminKey');
-        if ($adminKey == 'ak587238') {
             $pageCategory = "news";
             $pageNumber = "news_1";
             $arr = ['pageNumber' => $pageNumber,
                 'pageCategory' => $pageCategory];
             return view('admin.editNews', $arr);
-        } else {
-            return abort('404');
-        }
+    }
+
+    public  function getMessagesList(){
+            $pageCategory = "contacts";
+            $pageNumber = "messagesList";
+            $arr = ['pageNumber' => $pageNumber,
+                'pageCategory' => $pageCategory];
+            return view('admin.messagesList', $arr);
+    }
+
+    public function getRetailOrdersList(){
+        $pageCategory = "retailOrders";
+        $pageNumber = "retailOrdersList";
+        $arr = ['pageNumber' => $pageNumber,
+            'pageCategory' => $pageCategory];
+        return view('admin.retailОrders',$arr);
     }
 
 }

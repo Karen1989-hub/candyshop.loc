@@ -32,34 +32,38 @@ Route::get('/contactUs',[FrontPagesControllers::class,'getContactUsPage'])->name
 Route::get('/admin',[AdminLoginController::class,'getAdminLoginPage'])->name('getAdminLoginPage');
 
 Route::prefix('/admin')->group(function (){
-    Route::post('/checkAdminLogin',[AdminLoginController::class,'checkAdminLogin'])->name('checkAdminLogin');
-    Route::get('/goOut',[AdminLoginController::class,'goOut'])->name('goOut');
-    Route::get('/getDiscountsPage',[AdminPagesController::class,'getDiscountsPage'])->name('getDiscountsPage');
-    Route::get('/getEditSliderPage',[AdminPagesController::class,'getEditSliderPage'])->name('getEditSliderPage');
-    Route::get('/getEditProduktCategory',[AdminPagesController::class,'getEditProduktCategory'])->name('getEditProduktCategory');
-    Route::get('/getEditContactData',[AdminPagesController::class,'getEditContactData'])->name('getEditContactData');
-    Route::get('/getCreateProduct',[AdminPagesController::class,'getCreateProduct'])->name('getCreateProduct');
-    Route::get('/getDeleteOrEditProduct',[AdminPagesController::class,'getDeleteOrEditProduct'])->name('getDeleteOrEditProduct');
-    Route::get('/getEditCompanyInfo',[AdminPagesController::class,'getEditCompanyInfo'])->name('getEditCompanyInfo');
-    Route::get('/getEditPersonalInfo',[AdminPagesController::class,'getEditPersonalInfo'])->name('getEditPersonalInfo');
-    Route::get('/getEditAwards',[AdminPagesController::class,'getEditAwards'])->name('getEditAwards');
-    Route::get('/getEditNews',[AdminLoginController::class,'getEditNews'])->name('getEditNews');
+    Route::post('/checkAdminLogin',[AdminLoginController::class,'checkAdminLogin'])->middleware('admin')->name('checkAdminLogin');
+    Route::get('/goOut',[AdminLoginController::class,'goOut'])->middleware('admin')->name('goOut');
+    Route::get('/getDiscountsPage',[AdminPagesController::class,'getDiscountsPage'])->middleware('admin')->name('getDiscountsPage');
+    Route::get('/getEditSliderPage',[AdminPagesController::class,'getEditSliderPage'])->middleware('admin')->name('getEditSliderPage');
+    Route::get('/getEditProduktCategory',[AdminPagesController::class,'getEditProduktCategory'])->middleware('admin')->name('getEditProduktCategory');
+    Route::get('/getEditContactData',[AdminPagesController::class,'getEditContactData'])->middleware('admin')->name('getEditContactData');
+    Route::get('/getCreateProduct',[AdminPagesController::class,'getCreateProduct'])->middleware('admin')->name('getCreateProduct');
+    Route::get('/getDeleteOrEditProduct',[AdminPagesController::class,'getDeleteOrEditProduct'])->middleware('admin')->name('getDeleteOrEditProduct');
+    Route::get('/getEditCompanyInfo',[AdminPagesController::class,'getEditCompanyInfo'])->middleware('admin')->name('getEditCompanyInfo');
+    Route::get('/getEditPersonalInfo',[AdminPagesController::class,'getEditPersonalInfo'])->middleware('admin')->name('getEditPersonalInfo');
+    Route::get('/getEditAwards',[AdminPagesController::class,'getEditAwards'])->middleware('admin')->name('getEditAwards');
+    Route::get('/getEditNews',[AdminPagesController::class,'getEditNews'])->middleware('admin')->name('getEditNews');
+    Route::get('/getMessagesList',[AdminPagesController::class,'getMessagesList'])->middleware('admin')->name('getMessagesList');
+    Route::get('/getRetailOrdersList',[AdminPagesController::class,'getRetailOrdersList'])->middleware('admin')->name('getRetailOrdersList');
+
+
 });
 
 Route::prefix('/frontEdit')->group(function (){
-    Route::post('/createDiscount',[DiscountController::class,'createDiscount'])->name('createDiscount');
-    Route::get('/deleteDiscount/{id}',[DiscountController::class,'deleteDiscount'])->name('deleteDiscount');
-    Route::post('/createSliderPage',[HomePageEditController::class,'createSliderPage'])->name('createSliderPage');
-    Route::get('/deleteSliderPage/{id}',[HomePageEditController::class,'deleteSliderPage'])->name('deleteSliderPage');
-    Route::post('/createCategory',[HomePageEditController::class,'createCategory'])->name('createCategory');
-    Route::get('/deleteCategory/{id}',[HomePageEditController::class,'deleteCategory'])->name('deleteCategory');
-    Route::post('/editContactData',[HomePageEditController::class,'editContactData'])->name('editContactData');
-    Route::post('/updaetCompanyInfo',[AboutCompanyController::class,'updaetCompanyInfo'])->name('updaetCompanyInfo');
-    Route::post('/createNewEmployee',[AboutCompanyController::class,'createNewEmployee'])->name('createNewEmployee');
-    Route::get('/deleteEmployee/{id}',[AboutCompanyController::class,'deleteEmployee'])->name('deleteEmployee');
-    Route::post('/createProduct',[ShopPageController::class,'createProduct'])->name('createProduct');
-    Route::get('/deleteProduct/{id}',[ShopPageController::class,'deleteProduct'])->name('deleteProduct');
-    Route::post('/editProductPrice',[ShopPageController::class,'editProductPrice'])->name('editProductPrice');
+    Route::post('/createDiscount',[DiscountController::class,'createDiscount'])->middleware('admin')->name('createDiscount');
+    Route::get('/deleteDiscount/{id}',[DiscountController::class,'deleteDiscount'])->middleware('admin')->name('deleteDiscount');
+    Route::post('/createSliderPage',[HomePageEditController::class,'createSliderPage'])->middleware('admin')->name('createSliderPage');
+    Route::get('/deleteSliderPage/{id}',[HomePageEditController::class,'deleteSliderPage'])->middleware('admin')->name('deleteSliderPage');
+    Route::post('/createCategory',[HomePageEditController::class,'createCategory'])->middleware('admin')->name('createCategory');
+    Route::get('/deleteCategory/{id}',[HomePageEditController::class,'deleteCategory'])->middleware('admin')->name('deleteCategory');
+    Route::post('/editContactData',[HomePageEditController::class,'editContactData'])->middleware('admin')->name('editContactData');
+    Route::post('/updaetCompanyInfo',[AboutCompanyController::class,'updaetCompanyInfo'])->middleware('admin')->name('updaetCompanyInfo');
+    Route::post('/createNewEmployee',[AboutCompanyController::class,'createNewEmployee'])->middleware('admin')->name('createNewEmployee');
+    Route::get('/deleteEmployee/{id}',[AboutCompanyController::class,'deleteEmployee'])->middleware('admin')->name('deleteEmployee');
+    Route::post('/createProduct',[ShopPageController::class,'createProduct'])->middleware('admin')->name('createProduct');
+    Route::get('/deleteProduct/{id}',[ShopPageController::class,'deleteProduct'])->middleware('admin')->name('deleteProduct');
+    Route::post('/editProductPrice',[ShopPageController::class,'editProductPrice'])->middleware('admin')->name('editProductPrice');
 
 
 
