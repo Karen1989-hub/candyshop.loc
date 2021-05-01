@@ -8,6 +8,7 @@ use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\HomePageEditController;
 use App\Http\Controllers\AboutCompanyController;
 use App\Http\Controllers\ShopPageController;
+use App\Http\Controllers\AwardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,8 +65,8 @@ Route::prefix('/frontEdit')->group(function (){
     Route::post('/createProduct',[ShopPageController::class,'createProduct'])->middleware('admin')->name('createProduct');
     Route::get('/deleteProduct/{id}',[ShopPageController::class,'deleteProduct'])->middleware('admin')->name('deleteProduct');
     Route::post('/editProductPrice',[ShopPageController::class,'editProductPrice'])->middleware('admin')->name('editProductPrice');
-
-
+    Route::post('/createAwars',[AwardController::class,'createAwars'])->middleware('admin')->name('createAwars');
+    Route::get('/deleteAward/{id}',[AwardController::class,'deleteAward'])->middleware('admin')->name('deleteAward');
 
 });
 

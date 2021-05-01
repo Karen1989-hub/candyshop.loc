@@ -2,56 +2,13 @@
 <div class="instagram-box">
     <h3 style="color: white;text-align: center;font-size: 2em;">Наши награды</h3>
     <div class="main-instagram owl-carousel owl-theme">
+        @foreach($awards as $val)
         <div class="item">
             <div class="ins-inner-box">
-                <img src="{{asset('images2/rewards/foto-1006-min.jpg')}}" alt="" />
+                <img src="{{asset('images/awardImg/'.$val->imgName)}}" alt="error" />
             </div>
         </div>
-        <div class="item">
-            <div class="ins-inner-box">
-                <img src="{{asset('images2/rewards/foto-1010-min.jpg')}}" alt="" />
-            </div>
-        </div>
-        <div class="item">
-            <div class="ins-inner-box">
-                <img src="{{asset('images2/rewards/foto-1012-min.jpg')}}" alt="" />
-            </div>
-        </div>
-        <div class="item">
-            <div class="ins-inner-box">
-                <img src="{{asset('images2/rewards/foto-1013-min.jpg')}}" alt="" />
-            </div>
-        </div>
-        <div class="item">
-            <div class="ins-inner-box">
-                <img src="{{asset('images2/rewards/foto-1014-min.jpg')}}" alt="" />
-            </div>
-        </div>
-        <div class="item">
-            <div class="ins-inner-box">
-                <img src="{{asset('images2/rewards/foto-1015-min.jpg')}}" alt="" />
-            </div>
-        </div>
-        <div class="item">
-            <div class="ins-inner-box">
-                <img src="{{asset('images2/rewards/foto-1016-min.jpg')}}" alt="" />
-            </div>
-        </div>
-        <div class="item">
-            <div class="ins-inner-box">
-                <img src="{{asset('images2/rewards/foto-1021-min.jpg')}}" alt="" />
-            </div>
-        </div>
-        <div class="item">
-            <div class="ins-inner-box">
-                <img src="{{asset('images2/rewards/foto-1022-min.jpg')}}" alt="" />
-            </div>
-        </div>
-        <div class="item">
-            <div class="ins-inner-box">
-                <img src="{{asset('images2/rewards/foto-1026-min.jpg')}}" alt="" />
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>
 <!-- End Instagram Feed  -->

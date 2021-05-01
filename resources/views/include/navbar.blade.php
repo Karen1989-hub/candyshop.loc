@@ -14,7 +14,7 @@
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                     <li class="nav-item @if($frontPageName=='home') active @endif"><a class="nav-link" href="{{route('home')}}">Главная</a></li>
                     <li class="nav-item @if($frontPageName=='shop') active @endif"><a class="nav-link" href="{{route('shop')}}">Магазин</a></li>
-                    <li class="dropdown @if($frontPageName=='aboutCompany') active @endif">
+                    <li class="dropdown @if($frontPageName=='about') active @endif">
                         <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">о компании</a>
                         <ul class="dropdown-menu">
                             <li><a href="{{route('aboutUs')}}">О нас</a></li>
@@ -22,7 +22,7 @@
                             <li><a href="{{route('news')}}">Новости</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('contactUs')}}">Контакты</a></li>
+                    <li class="nav-item @if($frontPageName=='contactUs') active @endif"><a class="nav-link" href="{{route('contactUs')}}">Контакты</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

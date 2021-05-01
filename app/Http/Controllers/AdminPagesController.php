@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Award;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\Discount;
@@ -99,8 +100,11 @@ class AdminPagesController extends Controller
     public function getEditAwards(){
             $pageCategory = "awards";
             $pageNumber = "awards_1";
+            $awards = Award::all();
             $arr = ['pageNumber' => $pageNumber,
-                    'pageCategory' => $pageCategory];
+                    'pageCategory' => $pageCategory,
+                    'awards' => $awards
+                ];
             return view('admin.editAwards', $arr);
     }
 
