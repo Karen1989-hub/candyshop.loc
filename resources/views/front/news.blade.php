@@ -45,6 +45,7 @@
         </div>
         <div class="row">
             <div class="col-md-6 col-lg-4 col-xl-4">
+                <a href="{{route('getSinglNews')}}">
                 <div class="blog-box">
                     <div class="blog-img">
                         <img class="img-fluid" src="images2/news/2222222.jpg" alt="" />
@@ -56,6 +57,7 @@
                         </div>
                     </div>
                 </div>
+                </a>
             </div>
             <div class="col-md-6 col-lg-4 col-xl-4">
                 <div class="blog-box">

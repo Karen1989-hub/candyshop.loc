@@ -117,6 +117,18 @@ class FrontPagesControllers extends Controller
         return view('front.news', $arr);
     }
 
+    public function getSinglNews(){
+        $frontPageName = 'about';
+        $discount = Discount::all();
+        $contactData = ContactData::where('id', 1)->get();
+        $awards = Award::all();
+        $arr = ['frontPageName' => $frontPageName,
+            'discount' => $discount,
+            'awards' => $awards,
+            'contactData' => $contactData];
+        return view('front.singlNews',$arr);
+    }
+
     public function getContactUsPage()
     {
         $frontPageName = 'contactUs';

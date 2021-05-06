@@ -9,6 +9,7 @@ use App\Http\Controllers\HomePageEditController;
 use App\Http\Controllers\AboutCompanyController;
 use App\Http\Controllers\ShopPageController;
 use App\Http\Controllers\AwardController;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ Route::get('/shopDetail/{id}',[FrontPagesControllers::class,'getDetailShopPage']
 Route::get('/aboutUs',[FrontPagesControllers::class,'getAboutUsPage'])->name('aboutUs');
 Route::get('/awards',[FrontPagesControllers::class,'getАwardsPage'])->name('awards');
 Route::get('/news',[FrontPagesControllers::class,'getNewsPage'])->name('news');
+Route::get('/singlNews/1',[FrontPagesControllers::class,'getSinglNews'])->name('getSinglNews');
 Route::get('/contactUs',[FrontPagesControllers::class,'getContactUsPage'])->name('contactUs');
 Route::get('/admin',[AdminLoginController::class,'getAdminLoginPage'])->name('getAdminLoginPage');
 
@@ -67,7 +69,7 @@ Route::prefix('/frontEdit')->group(function (){
     Route::post('/editProductPrice',[ShopPageController::class,'editProductPrice'])->middleware('admin')->name('editProductPrice');
     Route::post('/createAwars',[AwardController::class,'createAwars'])->middleware('admin')->name('createAwars');
     Route::get('/deleteAward/{id}',[AwardController::class,'deleteAward'])->middleware('admin')->name('deleteAward');
-
+    Route::post('/createNews',[NewsController::class,'createNews'])->middleware('admin')->name('createNews');
 });
 
 
