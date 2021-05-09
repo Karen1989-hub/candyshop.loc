@@ -12,7 +12,7 @@ class NewsController extends Controller
     {
         $title = $request->input('title');
         $text = $request->input('text');
-        $uploadImg = $request->input('uploadImg');
+        $uploadImg = $request->file('uploadImg');
 
         $validator = Validator::make($request->all(),
             [
@@ -33,6 +33,18 @@ class NewsController extends Controller
 
         News::create(['title'=>$title,'text'=>$text]);
 
+        $maxId = News::max('id');
+        $uploadImg->move('images/news', $maxId.".jpg");
+        $update = News::find($maxId);
+        $update->imgName = $maxId . ".jpg";
+        $update->save();
+
+        return back();
+    }
+
+    public function deleteNews($id){
+        unlink("images/news/".$id.".jpg");
+        News::destroy($id);
         return back();
     }
 }

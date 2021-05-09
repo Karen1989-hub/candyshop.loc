@@ -15,7 +15,7 @@ Karen
         <!--form start-->
         <div class="row row-deck">
             <div class="col-lg-8" style="margin: 0 auto">
-                <form action="{{route('createProduct')}}" method="post" class="card" enctype="multipart/form-data">
+                <form action="{{route('createNews')}}" method="post" class="card" enctype="multipart/form-data">
                     @csrf
                     <div class="card-header">
                         <h3 class="card-title">Новые данные</h3>
@@ -48,6 +48,39 @@ Karen
             </div>
         </div>
         <!--form end-->
+        <!--table start-->
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Список слайдов</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table card-table table-vcenter text-nowrap">
+                            <thead>
+                            <tr>
+                                <th>N.</th>
+                                <th>Загаловок</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $n=0; ?>
+                            @foreach($news as $val)
+                                <tr>
+                                    <th scope="row"><?php $n++; echo $n; ?></th>
+                                    <td>{{$val->title}}</td>
+                                    <th><a href="/frontEdit/deleteNews/{{$val->id}}" class="btn btn-outline-danger" style="float: right">Удалит</a></th>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--table end-->
         <!--kontent end-->
     </div>
 </div>

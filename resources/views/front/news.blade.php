@@ -44,60 +44,21 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 col-lg-4 col-xl-4">
-                <a href="{{route('getSinglNews')}}">
-                <div class="blog-box">
-                    <div class="blog-img">
-                        <img class="img-fluid" src="images2/news/2222222.jpg" alt="" />
-                    </div>
-                    <div class="blog-content">
-                        <div class="title-blog">
-                            <h3>Давайте встречать новый год в шоколаде</h3>
-                            <p>24/09/2018</p>
-                        </div>
-                    </div>
-                </div>
-                </a>
-            </div>
+            @foreach($news as $val)
             <div class="col-md-6 col-lg-4 col-xl-4">
                 <div class="blog-box">
                     <div class="blog-img">
-                        <img class="img-fluid" src="images2/news/666555444.jpg" alt="" />
+                        <img class="img-fluid" style="max-height: 250px" src="{{asset('images/news/'.$val->imgName)}}" alt="" />
                     </div>
                     <div class="blog-content">
                         <div class="title-blog">
-                            <h3>Обратите внимание: склад готовой продукции переехал</h3>
-                            <p>16/09/2019</p>
+                            <h3>{{$val->title}}</h3>
+                            <p></p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 col-xl-4">
-                <div class="blog-box">
-                    <div class="blog-img">
-                        <img class="img-fluid" src="images2/news/img_3133.jpg" alt="" />
-                    </div>
-                    <div class="blog-content">
-                        <div class="title-blog">
-                            <h3>Истории, составленные нашими покупателями из названий конфет.</h3>
-                            <p>04/09/2018</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-4">
-                <div class="blog-box">
-                    <div class="blog-img">
-                        <img class="img-fluid" src="images2/news/img_3133.jpg" alt="" />
-                    </div>
-                    <div class="blog-content">
-                        <div class="title-blog">
-                            <h3>Истории, составленные нашими покупателями из названий конфет.</h3>
-                            <p>04/09/2018</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
 
     </div>

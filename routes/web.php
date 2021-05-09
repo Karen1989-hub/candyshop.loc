@@ -26,7 +26,6 @@ Route::get('/',[FrontPagesControllers::class,'getHomePage'])->name('home');
 Route::get('/shop',[FrontPagesControllers::class,'getShopPage'])->name('shop');
 Route::get('/shop/{category}',[FrontPagesControllers::class,'getShopPage']);
 Route::get('/shopDetail/{id}',[FrontPagesControllers::class,'getDetailShopPage']);
-
 Route::get('/aboutUs',[FrontPagesControllers::class,'getAboutUsPage'])->name('aboutUs');
 Route::get('/awards',[FrontPagesControllers::class,'getАwardsPage'])->name('awards');
 Route::get('/news',[FrontPagesControllers::class,'getNewsPage'])->name('news');
@@ -70,6 +69,7 @@ Route::prefix('/frontEdit')->group(function (){
     Route::post('/createAwars',[AwardController::class,'createAwars'])->middleware('admin')->name('createAwars');
     Route::get('/deleteAward/{id}',[AwardController::class,'deleteAward'])->middleware('admin')->name('deleteAward');
     Route::post('/createNews',[NewsController::class,'createNews'])->middleware('admin')->name('createNews');
+    Route::get('/deleteNews/{id}',[NewsController::class,'deleteNews'])->middleware('admin')->name('deleteNews');
 });
 
 

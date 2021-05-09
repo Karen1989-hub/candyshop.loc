@@ -12,6 +12,7 @@ use App\Models\Category;
 use App\Models\ContactData;
 use App\Models\Employee;
 use App\Models\Product;
+use App\Models\News;
 
 
 class FrontPagesControllers extends Controller
@@ -110,10 +111,13 @@ class FrontPagesControllers extends Controller
         $discount = Discount::all();
         $contactData = ContactData::where('id', 1)->get();
         $awards = Award::all();
+        $news = News::all();
         $arr = ['frontPageName' => $frontPageName,
             'discount' => $discount,
             'awards' => $awards,
-            'contactData' => $contactData];
+            'contactData' => $contactData,
+            'news' => $news
+            ];
         return view('front.news', $arr);
     }
 
