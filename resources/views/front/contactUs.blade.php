@@ -36,23 +36,27 @@
             <div class="col-lg-8 col-sm-12">
                 <div class="contact-form-right">
                     <h2>Вы можете отправить нам письмо.</h2>
-                    <form id="contactForm">
+                    <form action="{{route('createMessage')}}" method="post" id="contactForm">
+                        @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Ваше имя" required data-error="Please enter your name">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Ваше имя">
+                                    @if($errors->has('name')) <span style="color: red">{{$errors->first()}}</span> @endif
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" placeholder="эл. почта" id="email" class="form-control" name="name" required data-error="Please enter your email">
+                                    <input type="text" placeholder="эл. почта" id="email" class="form-control" name="email">
+                                    @if($errors->has('email')) <span style="color: red">{{$errors->first()}}</span> @endif
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <textarea class="form-control" id="message" placeholder="ваше писмо..." rows="4" data-error="Write your message" required></textarea>
+                                    <textarea class="form-control" id="message" name="message" placeholder="ваше писмо..." rows="4" ></textarea>
+                                    @if($errors->has('message')) <span style="color: red">{{$errors->first()}}</span> @endif
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="submit-button text-center">

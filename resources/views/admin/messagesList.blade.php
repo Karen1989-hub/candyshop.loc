@@ -12,7 +12,48 @@ Karen
             </ol>
         </div>
         <!--kontent start-->
-
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Список сообшений</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table card-table table-vcenter text-nowrap">
+                            <thead>
+                            <tr>
+                                <th>Но.</th>
+                                <th>Имя</th>
+                                <th>эл. почта</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            $n = 0
+                            ?>
+                            @foreach($message as $val)
+                                <?php
+                                $n++;
+                                ?>
+                            <tr>
+                                <th scope="row">{{$n}}</th>
+                                <td>{{$val->name}}</td>
+                                <td>{{$val->email}}</td>
+                                <td>@if($val->readState == "no readed") <span class="tag tag-orange">непрочтенное</span> @endif</td>
+                                <td><a href="/admin/getSingleMessage/{{$val->id}}" class="btn btn-outline-success">Прочитать</a></td>
+                                <td><a href="/admin/deleteMessage/{{$val->id}}" class="btn btn-outline-danger">Удалить</a></td>
+                            </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- table-responsive -->
+                </div>
+            </div>
+        </div>
         <!--kontent end-->
     </div>
 </div>

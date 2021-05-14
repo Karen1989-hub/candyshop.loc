@@ -13,23 +13,31 @@ use App\Models\ContactData;
 use App\Models\Employee;
 use App\Models\Product;
 use App\Models\News;
-
+use App\Models\User;
 
 class FrontPagesControllers extends Controller
 {
+    public function getInclud(){
+        return [
+            'awards'=>Award::all(),
+            'categories'=>Category::all(),
+            'discount'=>Discount::all(),
+            'contactData'=>ContactData::where('id', 1)->get(),
+            'autorizedUser'=>User::find(Cookie::get('userKey')),
+            ];
+}
     public function getHomePage()
     {
         $frontPageName = 'home';
         $discount = Discount::all();
         $homePageSlider = HomePageSlider::all();
-        $categories = Category::all();
         $contactData = ContactData::where('id', 1)->get();
-        $awards = Award::all();
+        $row = $this->getInclud();
         $arr = ['frontPageName' => $frontPageName,
             'discount' => $discount,
             'homePageSlider' => $homePageSlider,
-            'categories' => $categories,
-            'awards' => $awards,
+            'categories' => $row['categories'],
+            'awards' => $row['awards'],
             'contactData' => $contactData
         ];
         return view('front.home', $arr);
@@ -144,5 +152,17 @@ class FrontPagesControllers extends Controller
             'awards' => $awards,
             'contactData' => $contactData];
         return view('front.contactUs', $arr);
+    }
+
+    public function userRegistrationPage(){
+        $frontPageName = 'contactUs';
+        $row = $this->getInclud();
+        $arr = ['frontPageName' => $frontPageName,
+            'discount' => $row['discount'],
+            'awards' => $row['awards'],
+            'contactData' => $row['contactData'],
+            'autorizedUser' => $row['autorizedUser'],
+        ];
+        return view('front.userRegistration',$arr);
     }
 }

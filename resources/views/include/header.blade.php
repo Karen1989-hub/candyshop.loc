@@ -65,7 +65,7 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="right-phone-box">
-                    <p><a href="checkoutBaza.html">Вход для оптовиков</a><span class="opasit">._._.</span><a  href="checkoutUser.html">Вход | Регистрация</a><span class="opasit">._._.</span><a href="#"></a></p>
+                    <p><a href="checkoutBaza.html">Вход для оптовиков</a><span class="opasit">._._.</span><a  href="{{route('userRegistrationPage')}}">Вход | Регистрация</a><span class="opasit">._._.</span><a href="#"></a></p>
                 </div>
             </div>
         </div>

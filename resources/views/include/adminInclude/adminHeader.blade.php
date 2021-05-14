@@ -70,17 +70,17 @@
                         </div>
 
                         <div class="dropdown d-none d-md-flex">
-                            <a class="nav-link icon text-center" data-toggle="dropdown">
+                            <a href="{{route('getMessagesList')}}" class="nav-link icon text-center" data-toggle="dropdown">
                                 <i class="icon icon-speech"></i>
                                 @if(true)
-                                    <span class=" nav-unread badge badge-info badge-pill">2</span>
+                                    <span class=" nav-unread badge badge-info badge-pill">@if(isset($noReadedMessagesCount)) {{$noReadedMessagesCount}} @endif</span>
                                 @endif
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                <a href="#" class="dropdown-item text-center">2 New Messages</a>
+                                <a href="{{route('getMessagesList')}}" class="dropdown-item text-center">@if(isset($noReadedMessagesCount)) {{$noReadedMessagesCount}} @endif новых письма</a>
                                 <div class="dropdown-divider"></div>
                                 <div class="dropdown-divider"></div>
-                                <a href="" class="dropdown-item text-center">See all Messages</a>
+                                <a href="{{route('getMessagesList')}}" class="dropdown-item text-center">посматреть все письма</a>
                             </div>
                         </div>
 
