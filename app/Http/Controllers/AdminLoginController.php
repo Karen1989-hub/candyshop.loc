@@ -35,7 +35,7 @@ class AdminLoginController extends Controller
         $result = Admin::where('login',$login)->where('password',$password)->get();
 
         if(count($result)>0){
-            Cookie::queue('adminKey','ak587238',86400);
+            Cookie::queue('adminKey','ak587238',1440);
             return redirect()->route('getDiscountsPage');
         } else {
             $arr = ['adminloginError'=>'неправельный логин или пароль'];

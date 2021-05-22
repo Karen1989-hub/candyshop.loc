@@ -28,6 +28,8 @@ Route::get('/',[FrontPagesControllers::class,'getHomePage'])->name('home');
 Route::get('/shop',[FrontPagesControllers::class,'getShopPage'])->name('shop');
 Route::get('/shop/{category}',[FrontPagesControllers::class,'getShopPage']);
 Route::get('/shopDetail/{id}',[FrontPagesControllers::class,'getDetailShopPage']);
+Route::get('/getOrderPage',[FrontPagesControllers::class,'getOrderPage'])->name('getOrderPage');
+
 Route::get('/aboutUs',[FrontPagesControllers::class,'getAboutUsPage'])->name('aboutUs');
 Route::get('/awards',[FrontPagesControllers::class,'getАwardsPage'])->name('awards');
 Route::get('/news',[FrontPagesControllers::class,'getNewsPage'])->name('news');
@@ -37,7 +39,7 @@ Route::get('/admin',[AdminLoginController::class,'getAdminLoginPage'])->name('ge
 Route::get('/userRegistrationPage',[FrontPagesControllers::class,'userRegistrationPage'])->name('userRegistrationPage');
 
 Route::prefix('/admin')->group(function (){
-    Route::post('/checkAdminLogin',[AdminLoginController::class,'checkAdminLogin'])->middleware('admin')->name('checkAdminLogin');
+    Route::post('/checkAdminLogin',[AdminLoginController::class,'checkAdminLogin'])->name('checkAdminLogin');
     Route::get('/goOut',[AdminLoginController::class,'goOut'])->middleware('admin')->name('goOut');
     Route::get('/getDiscountsPage',[AdminPagesController::class,'getDiscountsPage'])->middleware('admin')->name('getDiscountsPage');
     Route::get('/getEditSliderPage',[AdminPagesController::class,'getEditSliderPage'])->middleware('admin')->name('getEditSliderPage');
@@ -53,7 +55,6 @@ Route::prefix('/admin')->group(function (){
     Route::post('/createMessage',[MessagesController::class,'createMessage'])->middleware('admin')->name('createMessage');
     Route::get('/deleteMessage/{id}',[MessagesController::class,'deleteMessage'])->middleware('admin')->name('deleteMessage');
     Route::get('/getSingleMessage/{id}',[MessagesController::class,'getSingleMessage'])->middleware('admin')->name('getSingleMessage');
-
     Route::get('/getRetailOrdersList',[AdminPagesController::class,'getRetailOrdersList'])->middleware('admin')->name('getRetailOrdersList');
     Route::get('/getWholesalerOrdersList',[AdminPagesController::class,'getWholesalerOrdersList'])->middleware('admin')->name('getWholesalerOrdersList');
     Route::get('/getWholesalersRegistration',[AdminPagesController::class,'getWholesalersRegistration'])->middleware('admin')->name('getWholesalersRegistration');
@@ -81,7 +82,11 @@ Route::prefix('/frontEdit')->group(function (){
     Route::post('/createNews',[NewsController::class,'createNews'])->middleware('admin')->name('createNews');
     Route::get('/deleteNews/{id}',[NewsController::class,'deleteNews'])->middleware('admin')->name('deleteNews');
 });
-
 Route::prefix('/user')->group(function (){
-    Route::post('/createUser',[userController::class,'createUser'])->middleware('admin')->name('createUser');
+    Route::post('/createUser',[userController::class,'createUser'])->name('createUser');
+    Route::get('/signUp',[userController::class,'signUp'])->name('signUp');
+    Route::post('/signIn',[userController::class,'signIn'])->name('signIn');
+    Route::get('/addInBasket/{id}',[userController::class,'addInBasket'])->name('addInBasket');
+    Route::post('/updateInBasket',[userController::class,'updateInBasket'])->name('updateInBasket');
+    Route::get('/deleteInBasket/{id}',[userController::class,'deleteInBasket'])->name('deleteInBasket');
 });

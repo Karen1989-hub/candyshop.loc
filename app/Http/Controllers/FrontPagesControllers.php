@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AboutCompany;
 use App\Models\Award;
+use App\Models\Basket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\Discount;
@@ -14,155 +15,235 @@ use App\Models\Employee;
 use App\Models\Product;
 use App\Models\News;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class FrontPagesControllers extends Controller
 {
-    public function getInclud(){
+    public function getInclud()
+    {
+        if (Cookie::get('userKey') != false) {
+            $autorizedUser = User::find(Cookie::get('userKey'));
+            $basketProducts = User::find(Cookie::get('userKey'))->getBasketProducts();
+            $basketAllProductsCount = User::find(Cookie::get('userKey'))->getBasketProducts()->count();
+            $getBasketAllProductsPrice = User::find(Cookie::get('userKey'))->getBasketAllProductsPrice();
+        } else {
+            $autorizedUser = null;
+            $basketProducts = null;
+            $basketAllProductsCount = null;
+            $getBasketAllProductsPrice = null;
+        }
+
         return [
-            'awards'=>Award::all(),
-            'categories'=>Category::all(),
-            'discount'=>Discount::all(),
-            'contactData'=>ContactData::where('id', 1)->get(),
-            'autorizedUser'=>User::find(Cookie::get('userKey')),
-            ];
-}
+            'awards' => Award::all(),
+            'discount' => Discount::all(),
+            'contactData' => ContactData::where('id', 1)->get(),
+            'autorizedUser' => $autorizedUser,
+            'basketProducts' => $basketProducts,
+            'basketAllProductsCount' => $basketAllProductsCount,
+            'getBasketAllProductsPrice' => $getBasketAllProductsPrice,
+
+        ];
+    }
+
+
+
     public function getHomePage()
     {
+
         $frontPageName = 'home';
-        $discount = Discount::all();
         $homePageSlider = HomePageSlider::all();
-        $contactData = ContactData::where('id', 1)->get();
+        $categories = Category::all();
         $row = $this->getInclud();
         $arr = ['frontPageName' => $frontPageName,
-            'discount' => $discount,
+            'discount' => $row['discount'],
             'homePageSlider' => $homePageSlider,
-            'categories' => $row['categories'],
+            'categories' => $categories,
             'awards' => $row['awards'],
-            'contactData' => $contactData
+            'contactData' => $row['contactData'],
+            'basketProducts' => $row['basketProducts'],
+            'basketAllProductsCount' => $row['basketAllProductsCount'],
+            'getBasketAllProductsPrice' => $row['getBasketAllProductsPrice'],
+            'autorizedUser' => $row['autorizedUser'],
         ];
+//         function getSiPr($id){
+//            $n = Basket::where('userId',Cookie::get('userKey'))->where('productId',$id)->get();
+//            return $n[0]->productCount;
+//        };
+//        dd(getSiPr(11));
+
         return view('front.home', $arr);
     }
 
     public function getShopPage($category = "all")
     {
+        $row = $this->getInclud();
         $frontPageName = 'shop';
-        $discount = Discount::all();
-        $contactData = ContactData::where('id', 1)->get();
         $categories = Category::all();
-        $awards = Award::all();
         if ($category == "all") {
             $products = Product::all();
         } else {
             $products = Product::where('category', $category)->get();
         }
         $arr = ['frontPageName' => $frontPageName,
-            'discount' => $discount,
-            'contactData' => $contactData,
+            'discount' => $row['discount'],
+            'contactData' => $row['contactData'],
             'products' => $products,
-            'awards' => $awards,
+            'awards' => $row['awards'],
+            'basketProducts' => $row['basketProducts'],
+            'basketAllProductsCount' => $row['basketAllProductsCount'],
+            'getBasketAllProductsPrice' => $row['getBasketAllProductsPrice'],
+            'autorizedUser' => $row['autorizedUser'],
             'categories' => $categories];
         return view('front.shop', $arr);
     }
 
     public function getDetailShopPage($id)
     {
-
+        $row = $this->getInclud();
         $frontPageName = 'shop';
-        $discount = Discount::all();
-        $contactData = ContactData::where('id', 1)->get();
         $singlProduct = Product::where('id', $id)->get();
-        $awards = Award::all();
+        if(Cookie::get('userKey') != null){
+            $singlProductCount = Basket::where('userId',Cookie::get('userKey'))->where('productId',$id)->first();
+        } else {
+            $singlProductCount = null;
+        }
+
+        //dd($singlProductCount->productCount);
 
         $arr = ['frontPageName' => $frontPageName,
-            'discount' => $discount,
-            'contactData' => $contactData,
-            'awards' => $awards,
+            'discount' => $row['discount'],
+            'contactData' => $row['contactData'],
+            'awards' => $row['awards'],
+            'basketProducts' => $row['basketProducts'],
+            'basketAllProductsCount' => $row['basketAllProductsCount'],
+            'getBasketAllProductsPrice' => $row['getBasketAllProductsPrice'],
+            'autorizedUser' => $row['autorizedUser'],
+            'singlProductCount' => $singlProductCount,
             'singlProduct' => $singlProduct];
         return view('front.shopDetail', $arr);
     }
 
+    public function getOrderPage(){
+        $row = $this->getInclud();
+        $frontPageName = 'shop';
+        $arr = [
+            'frontPageName' => $frontPageName,
+            'discount' => $row['discount'],
+            'awards' => $row['awards'],
+            'contactData' => $row['contactData'],
+            'basketProducts' => $row['basketProducts'],
+            'basketAllProductsCount' => $row['basketAllProductsCount'],
+            'getBasketAllProductsPrice' => $row['getBasketAllProductsPrice'],
+            'autorizedUser' => $row['autorizedUser'],
+        ];
+        return view('front.toOrder',$arr);
+    }
+
     public function getAboutUsPage()
     {
+        $row = $this->getInclud();
         $frontPageName = 'about';
-        $discount = Discount::all();
-        $contactData = ContactData::where('id', 1)->get();
         $aboutCompany = AboutCompany::first();
         $employees = Employee::all();
-        $awards = Award::all();
         $arr = ['frontPageName' => $frontPageName,
-            'discount' => $discount,
-            'contactData' => $contactData,
+            'discount' => $row['discount'],
+            'contactData' => $row['contactData'],
             'aboutCompany' => $aboutCompany,
             'employees' => $employees,
-            'awards' => $awards
+            'basketProducts' => $row['basketProducts'],
+            'basketAllProductsCount' => $row['basketAllProductsCount'],
+            'getBasketAllProductsPrice' => $row['getBasketAllProductsPrice'],
+            'autorizedUser' => $row['autorizedUser'],
+            'awards' => $row['awards'],
         ];
         return view('front.aboutUs', $arr);
     }
 
     public function getАwardsPage()
     {
+        $row = $this->getInclud();
         $frontPageName = 'about';
-        $discount = Discount::all();
-        $contactData = ContactData::where('id', 1)->get();
-        $awards = Award::all();
         $arr = ['frontPageName' => $frontPageName,
-            'discount' => $discount,
-            'contactData' => $contactData,
-            'awards' => $awards
+            'discount' => $row['discount'],
+            'contactData' => $row['contactData'],
+            'basketProducts' => $row['basketProducts'],
+            'basketAllProductsCount' => $row['basketAllProductsCount'],
+            'getBasketAllProductsPrice' => $row['getBasketAllProductsPrice'],
+            'autorizedUser' => $row['autorizedUser'],
+            'awards' => $row['awards'],
         ];
         return view('front.awards', $arr);
     }
 
     public function getNewsPage()
     {
+        $row = $this->getInclud();
         $frontPageName = 'about';
-        $discount = Discount::all();
-        $contactData = ContactData::where('id', 1)->get();
-        $awards = Award::all();
         $news = News::all();
         $arr = ['frontPageName' => $frontPageName,
-            'discount' => $discount,
-            'awards' => $awards,
-            'contactData' => $contactData,
+            'discount' => $row['discount'],
+            'awards' => $row['awards'],
+            'basketProducts' => $row['basketProducts'],
+            'basketAllProductsCount' => $row['basketAllProductsCount'],
+            'getBasketAllProductsPrice' => $row['getBasketAllProductsPrice'],
+            'contactData' => $row['contactData'],
+            'autorizedUser' => $row['autorizedUser'],
             'news' => $news
-            ];
+        ];
         return view('front.news', $arr);
     }
 
-    public function getSinglNews(){
+    public function getSinglNews()
+    {
+        $row = $this->getInclud();
         $frontPageName = 'about';
-        $discount = Discount::all();
-        $contactData = ContactData::where('id', 1)->get();
-        $awards = Award::all();
         $arr = ['frontPageName' => $frontPageName,
-            'discount' => $discount,
-            'awards' => $awards,
-            'contactData' => $contactData];
-        return view('front.singlNews',$arr);
+            'discount' => $row['discount'],
+            'awards' => $row['awards'],
+            'basketProducts' => $row['basketProducts'],
+            'basketAllProductsCount' => $row['basketAllProductsCount'],
+            'getBasketAllProductsPrice' => $row['getBasketAllProductsPrice'],
+            'autorizedUser' => $row['autorizedUser'],
+            'contactData' => $row['contactData'],
+        ];
+        return view('front.singlNews', $arr);
     }
 
     public function getContactUsPage()
     {
+        $row = $this->getInclud();
         $frontPageName = 'contactUs';
-        $discount = Discount::all();
-        $contactData = ContactData::where('id', 1)->get();
-        $awards = Award::all();
         $arr = ['frontPageName' => $frontPageName,
-            'discount' => $discount,
-            'awards' => $awards,
-            'contactData' => $contactData];
+            'discount' => $row['discount'],
+            'awards' => $row['awards'],
+            'basketProducts' => $row['basketProducts'],
+            'basketAllProductsCount' => $row['basketAllProductsCount'],
+            'getBasketAllProductsPrice' => $row['getBasketAllProductsPrice'],
+            'autorizedUser' => $row['autorizedUser'],
+            'contactData' => $row['contactData'],
+        ];
         return view('front.contactUs', $arr);
     }
 
-    public function userRegistrationPage(){
+    public function userRegistrationPage()
+    {
         $frontPageName = 'contactUs';
         $row = $this->getInclud();
+        if (Cookie::get('userRegistrationError') != false) {
+            $userRegistrationError = Cookie::get('userRegistrationError');
+        } else {
+            $userRegistrationError = null;
+        }
         $arr = ['frontPageName' => $frontPageName,
             'discount' => $row['discount'],
             'awards' => $row['awards'],
             'contactData' => $row['contactData'],
+            'basketProducts' => $row['basketProducts'],
+            'basketAllProductsCount' => $row['basketAllProductsCount'],
+            'getBasketAllProductsPrice' => $row['getBasketAllProductsPrice'],
             'autorizedUser' => $row['autorizedUser'],
+            'userRegistrationError' => $userRegistrationError,
         ];
-        return view('front.userRegistration',$arr);
+        return view('front.userRegistration', $arr);
     }
 }

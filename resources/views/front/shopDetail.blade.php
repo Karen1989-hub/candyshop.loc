@@ -38,7 +38,9 @@
             <div class="col-xl-5 col-lg-5 col-md-6">
                 <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active"> <img class="d-block w-100" src="{{asset('images/productsImg/'.$singlProduct[0]->imgName)}}" alt="First slide"> </div>
+                        <div class="carousel-item active"><img class="d-block w-100"
+                                                               src="{{asset('images/productsImg/'.$singlProduct[0]->imgName)}}"
+                                                               alt="First slide"></div>
 
                     </div>
 
@@ -55,21 +57,27 @@
 
                     <h4>Детальное описание:</h4>
                     <p>{{$singlProduct[0]->description}}</p>
-                    <ul>
-                        <li>
-                            <div class="form-group quantity-box">
-                                <label class="control-label">Количество</label>
-                                <input class="form-control" value="0" min="0" max="20" type="number">
+                    @if($singlProductCount != null)
+                        <form action="{{route('updateInBasket')}}" method="post">
+                            @csrf
+                            <ul>
+                                <li>
+                                    <div class="form-group quantity-box">
+                                        <input type="hidden" name="productId" value="{{$singlProduct[0]->id}}">
+                                        <label class="control-label">Количество</label>
+                                        <input name="productCount" class="form-control" value="{{$singlProductCount->productCount}}" min="0"
+                                               max="20" type="number">
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="price-box-bar">
+                                <div class="cart-and-bay-btn">
+                                    <button type="submit" class="btn hvr-hover" style="color: #fff">В корзину</button>
+                                </div>
                             </div>
-                        </li>
-                    </ul>
-
-                    <div class="price-box-bar">
-                        <div class="cart-and-bay-btn">
-                            <a class="btn hvr-hover" data-fancybox-close="" href="#">В корзину</a>
-                        </div>
-                    </div>
-
+                        </form>
+                    @endif
 
                 </div>
             </div>

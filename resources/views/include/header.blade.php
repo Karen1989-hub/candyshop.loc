@@ -45,8 +45,11 @@
                 </div>
                 <div class="our-link">
                     <ul>
-                        <li><a href="#"><i class="fa fa-user s_color"></i> Ароян Карен</a></li>
-
+                        <li><a href="#"><i class="fa fa-user s_color"></i>
+                                @if($autorizedUser != null)
+                                    {{$autorizedUser->firstName}} {{$autorizedUser->lastName}}
+                                @endif
+                            </a></li>
                     </ul>
                 </div>
             </div>
@@ -55,9 +58,9 @@
                     <div id="offer-box" class="carouselTicker">
                         <ul class="offer-box">
                             @foreach($discount as $val)
-                            <li>
-                                <i class="fab fa-opencart"></i> {{$val->text}}
-                            </li>
+                                <li>
+                                    <i class="fab fa-opencart"></i> {{$val->text}}
+                                </li>
                             @endforeach
                         </ul>
                     </div>
@@ -65,7 +68,14 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="right-phone-box">
-                    <p><a href="checkoutBaza.html">Вход для оптовиков</a><span class="opasit">._._.</span><a  href="{{route('userRegistrationPage')}}">Вход | Регистрация</a><span class="opasit">._._.</span><a href="#"></a></p>
+                    @if($autorizedUser == null)
+                    <p><a href="checkoutBaza.html">Вход для оптовиков</a><span class="opasit">._._.</span><a
+                            href="{{route('userRegistrationPage')}}">Вход | Регистрация</a><span
+                            class="opasit">._._.</span><a href="#"></a></p>
+                    @endif
+                </div>
+                <div class="right-phone-box" style="float: right">
+                    <p><a href="/user/signUp">выход</a></p>
                 </div>
             </div>
         </div>

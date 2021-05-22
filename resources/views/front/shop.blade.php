@@ -53,7 +53,7 @@
                                                             <li><a href="/shopDetail/{{$val->id}}" data-toggle="tooltip" data-placement="right" title="Детально"><i
                                                                         class="fas fa-eye"></i></a></li>
                                                         </ul>
-                                                        <a class="cart" href="shop-detail.html">В корзину</a>
+                                                        <a class="cart" href="/user/addInBasket/{{$val->id}}">В корзину</a>
                                                     </div>
                                                 </div>
                                                 <div class="why-text">
