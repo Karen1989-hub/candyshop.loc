@@ -19,15 +19,12 @@
 //
 // });
 
-$(document.ready(function(){
-    $("#subUpdate").click(function(){
-        $('basketUpdateForm').each(function(){
-            let payload = $(this).serialize();
-            console.log(payload);
-            //Send payload via Ajax.
-        });
-    });
-}));
+$('#address1').change(function (){
+    $('#address2').val($('#address1').val());
+})
+
+
+
 
 
 

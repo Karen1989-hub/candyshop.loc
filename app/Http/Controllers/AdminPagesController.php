@@ -14,6 +14,8 @@ use App\Models\Employee;
 use App\Models\Product;
 use App\Models\News;
 use App\Models\Message;
+use App\Models\UserOrder;
+use App\Models\UserOrderProduct;
 
 
 class AdminPagesController extends Controller
@@ -171,9 +173,13 @@ class AdminPagesController extends Controller
         $noReadedMessagesCount = Message::where('readState', 'no readed')->count();
         $pageCategory = "retailOrders";
         $pageNumber = "retailOrdersList";
-        $arr = ['pageNumber' => $pageNumber,
+        $userOrder = UserOrder::all();
+        $arr = [
+            'pageNumber' => $pageNumber,
             'noReadedMessagesCount' => $noReadedMessagesCount,
-            'pageCategory' => $pageCategory];
+            'pageCategory' => $pageCategory,
+            'userOrder' => $userOrder,
+            ];
         return view('admin.retailОrders', $arr);
     }
 

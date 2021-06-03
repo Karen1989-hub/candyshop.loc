@@ -11,5 +11,8 @@ class Basket extends Model
     use HasFactory;
     protected $fillable = ['userId','productId','productCount'];
 
+    public function getSinglProduct(){
+        return $this->hasMany(Product::class,'id','productId')->first();
+    }
 
 }

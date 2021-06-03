@@ -12,6 +12,7 @@ use App\Http\Controllers\AwardController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\OrdersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,4 +90,7 @@ Route::prefix('/user')->group(function (){
     Route::get('/addInBasket/{id}',[userController::class,'addInBasket'])->name('addInBasket');
     Route::post('/updateInBasket',[userController::class,'updateInBasket'])->name('updateInBasket');
     Route::get('/deleteInBasket/{id}',[userController::class,'deleteInBasket'])->name('deleteInBasket');
+    Route::post('/createUserOrder',[OrdersController::class,'createUserOrder'])->name('createUserOrder');
 });
+
+

@@ -66,13 +66,15 @@
                                     <td class="price-pr">
                                         <p>{{$val->price}}&#8381</p>
                                     </td>
-                                    <td class="quantity-box" style="text-indent: 20px">{{$val->getProductInBasketCount()->productCount}}</td>
-{{--                                    <td class="quantity-box"><input name="productCount" type="number" size="4"--}}
-{{--                                                                    value="{{$val->getProductInBasketCount()->productCount}}"--}}
-{{--                                                                    min="0" step="1"--}}
-{{--                                                                    class="c-input-text qty text"></td>--}}
+                                    <td class="quantity-box"
+                                        style="text-indent: 20px">{{$val->getProductInBasketCount()->productCount}}</td>
+                                    {{--                                    <td class="quantity-box"><input name="productCount" type="number" size="4"--}}
+                                    {{--                                                                    value="{{$val->getProductInBasketCount()->productCount}}"--}}
+                                    {{--                                                                    min="0" step="1"--}}
+                                    {{--                                                                    class="c-input-text qty text"></td>--}}
                                     <td class="total-pr">
-                                        <p>@php echo $val->price * $val->getProductInBasketCount()->productCount; @endphp&#8381</p>
+                                        <p>@php echo $val->price * $val->getProductInBasketCount()->productCount; @endphp
+                                            &#8381</p>
                                     </td>
                                     <td class="remove-pr">
                                         <a href="/user/deleteInBasket/{{$val->id}}">
@@ -85,32 +87,15 @@
                         </tbody>
                     </table>
 
-{{--                    <div class="col-lg-6 col-sm-6">--}}
-{{--                        <div class="update-box">--}}
-{{--                            <input id="subUpdate" value="Обновить список" type="submit">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    {{--                    <div class="col-lg-6 col-sm-6">--}}
+                    {{--                        <div class="update-box">--}}
+                    {{--                            <input id="subUpdate" value="Обновить список" type="submit">--}}
+                    {{--                        </div>--}}
+                    {{--                    </div>--}}
 
                 </div>
             </div>
         </div>
-
-        <div class="row my-5">
-            <div class="col-lg-6 col-sm-6">
-                <div class="coupon-box">
-                    <div class="input-group input-group-sm">
-                        <input class="form-control" placeholder="Введите адрес доставки" aria-label="Coupon code"
-                               type="text">
-                        <div class="input-group-append">
-                            <button class="btn btn-theme" type="button">Подтвердить адрес</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-
 
         <div class="row my-5">
             <div class="col-lg-8 col-sm-12"></div>
@@ -121,33 +106,47 @@
                         @php $sum = 0; @endphp
                         @foreach($basketProducts as $val)
                             <div class="d-flex">
-                                <h4>{{$val->title}}</h4>
-                                <div class="ml-auto font-weight-bold">@php echo $val->price * $val->getProductInBasketCount()->productCount; $sum+=$val->price * $val->getProductInBasketCount()->productCount; @endphp&#8381</div>
+                                <h4>{{$val->title}} ({{$val->getProductInBasketCount()->productCount}})</h4>
+                                <div
+                                    class="ml-auto font-weight-bold"> @php echo $val->price * $val->getProductInBasketCount()->productCount; $sum+=$val->price * $val->getProductInBasketCount()->productCount; @endphp
+                                    &#8381
+                                </div>
                             </div>
                         @endforeach
 
-                    <hr class="my-1">
-                    <div class="d-flex">
-                        <h4>Доставка</h4>
-                        <div class="ml-auto font-weight-bold">  0</div>
-                    </div>
+                        <hr class="my-1">
+                        <div class="d-flex">
+                            <h4>Доставка</h4>
+                            <div class="ml-auto font-weight-bold"> 0</div>
+                        </div>
 
-
-                    <hr>
-                    <div class="d-flex gr-total">
-                        <h5>Всего сумма</h5>
-                        <div class="ml-auto h5">{{$sum}}&#8381</div>
-                    </div>
-                    <hr>
+                        <hr>
+                        <div class="d-flex gr-total">
+                            <h5>Всего сумма</h5>
+                            <div class="ml-auto h5">{{$sum}}&#8381</div>
+                        </div>
+                        <hr>
                     @endif
                 </div>
             </div>
+            <input class="form-control w-50 " id="address1" style="float: right"  placeholder="Введите адрес доставки" aria-label="Coupon code"
+                   type="text">
             <div class="col-12 d-flex shopping-box"><a href="checkout.html" class="ml-auto btn hvr-hover">Оплатить
                     сейчас</a></div>
-            <div class="col-12 d-flex shopping-box mt-1"><a href="checkout.html" class="ml-auto btn hvr-hover">Оплата
-                    при доставке</a></div>
-        </div>
 
+                <div class="col-12 shopping-box mt-1">
+                    <form action="{{route('createUserOrder')}}" method="post">
+                        @csrf
+                        <input type="hidden" name="payment" value="оплата при доставке">
+                        <input class="form-control w-50" name="address" id="address2" style="float: right"  placeholder="Введите адрес доставки" aria-label="Coupon code"
+                               type="hidden">
+                    <button type="submit" class=" btn hvr-hover"
+                            style="color: white;font-size: 1.2em;padding: 10px 20px; float: right;">Оплата при доставке
+                    </button>
+                    </form>
+                </div>
+
+        </div>
     </div>
 </div>
 <!-- End Cart -->

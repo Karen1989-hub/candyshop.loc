@@ -23,6 +23,7 @@ class FrontPagesControllers extends Controller
     {
         if (Cookie::get('userKey') != false) {
             $autorizedUser = User::find(Cookie::get('userKey'));
+            //dd(User::find(Cookie::get('userKey'))->getBasketProducts());
             $basketProducts = User::find(Cookie::get('userKey'))->getBasketProducts();
             $basketAllProductsCount = User::find(Cookie::get('userKey'))->getBasketProducts()->count();
             $getBasketAllProductsPrice = User::find(Cookie::get('userKey'))->getBasketAllProductsPrice();
