@@ -30,6 +30,7 @@
                                     <th class="wd-20p">Категория</th>
                                     <th class="wd-5p">Цена</th>
                                     <th class="wd-15p"></th>
+                                    <th class="wd-15p">Количество<br> на складе</th>
                                     <th class="wd-15p"></th>
                                     <th class="wd-10p"></th>
 
@@ -46,6 +47,7 @@
                                         <td>{{$val->category}}</td>
                                             <td><input type="text" class="form-control" name="price" value="{{$val->price}}"></td>
                                             <td>{{$val->calculateType}}</td>
+                                            <td><input type="text" class="form-control" name="countInStock" value="{{$val->countInStock}}"></td>
                                             <td><button type="submit" class="btn btn-outline-warning">Сохранить</button></td>
                                         </form>
                                         <td><a href="/frontEdit/deleteProduct/{{$val->id}}" class="btn btn-outline-danger">Удалить</a></td>

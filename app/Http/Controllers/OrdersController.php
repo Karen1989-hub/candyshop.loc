@@ -17,13 +17,15 @@ class OrdersController extends Controller
         $address = $request->input('address');
         $payment = $request->input('payment');
 
-        //UserOrder::create(['userId'=>$userId,'payment'=>$payment,'deliveryAddress'=>$address]);
+        UserOrder::create(['userId'=>$userId,'payment'=>$payment,'deliveryAddress'=>$address]);
+
+        $maxUserOrderId = UserOrder::max('id');
 
         $userOrderBasket = Basket::where('userId', Cookie::get('userKey'))->get();
 
         foreach ($userOrderBasket as $val) {
             UserOrderProduct::create([
-                'userOrderId' => $userId,
+                'userOrderId' => $maxUserOrderId,
                 'productId' => $val->productId,
                 'productTitle' => $val->getSinglProduct()->title,
                 'productSinglPrice' => $val->getSinglProduct()->price,

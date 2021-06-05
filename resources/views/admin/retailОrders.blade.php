@@ -16,7 +16,7 @@ Karen
             <div class="col-md-12 col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Список сообшений</h3>
+                        <h3 class="card-title">Список заказов</h3>
                     </div>
                     <div class="table-responsive">
                         <table class="table card-table table-vcenter text-nowrap">
@@ -42,14 +42,14 @@ Karen
                                 $n++;
                                 ?>
                                 <tr>
-                                    <th scope="row">{{$n}}</th>
-                                    <td>Karen Aroyan</td>
-                                    <td>098905050</td>
-                                    <td>Pushkin p 3 62 bnakaran</td>
-                                    <td>oplata pri dostawke</td>
-                                    <td>v ojidanii</td>
-                                    <td>13.11.1989 654465464ww</td>
-                                    <td><a href="/admin/getSingleMessage/" class="btn btn-outline-success">Прочитать</a>
+                                    <th scope="row">{{$val->id}}</th>
+                                    <td>{{$val->getOrdersUser()->firstName}} {{$val->getOrdersUser()->lastName}}</td>
+                                    <td>{{$val->getOrdersUser()->telephon}}</td>
+                                    <td>{{$val->deliveryAddress}}</td>
+                                    <td>{{$val->payment}}</td>
+                                    <td>{{$val->status}}</td>
+                                    <td>{{$val->created_at}}</td>
+                                    <td><a href="/admin/getSinglRetailOrdersList/{{$val->id}}" class="btn btn-outline-success">Прочитать</a>
                                     </td>
                                     <td><a href="/admin/deleteMessage/"
                                            class="btn btn-outline-danger">Удалить</a></td>

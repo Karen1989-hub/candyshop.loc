@@ -16,7 +16,11 @@ class UserOrder extends Model
     }
 
     public function getUserOrderProduct(){
-        return $this->hasMany(UserOrderProduct::class,'userOrderId');
+        return $this->hasMany(UserOrderProduct::class,'userOrderId','id')->get();
+    }
+
+    public function getUserOrderProductSum(){
+        return $this->hasMany(UserOrderProduct::class,'userOrderId','id')->sum('productAllPrice');
     }
 }
 

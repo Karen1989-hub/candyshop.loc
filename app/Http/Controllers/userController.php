@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Validator;
@@ -99,14 +100,24 @@ class userController extends Controller
         }
     }
 
-    public function addInBasket($id){
+    public function addInBasket(Request $request,$id){
         if (Cookie::get('userKey') != false) {
             $availabilityProduct = Basket::where('userId',Cookie::get('userKey'))->where('productId',$id)->get();
             if(count($availabilityProduct)>0){
                 return back();
             } else {
-                Basket::create(['userId'=>Cookie::get('userKey'),'productId'=>$id]);
-                return back();
+                $countInStock = Product::where('id',$id)->first()->countInStock;
+                //ստուգում և հանւմ եմ ապրանքը պահեստից
+                if($countInStock - 1 >= 0){
+                    Basket::create(['userId'=>Cookie::get('userKey'),'productId'=>$id]);
+                    $update = Product::find($id);
+                    $update->countInStock = $countInStock - 1;
+                    $update->save();
+                    return back();
+                } else {
+                    return redirect()->route('errorAboutCountInStock');
+                }
+
             }
 
         } else {
@@ -117,6 +128,8 @@ class userController extends Controller
     public function updateInBasket(Request $request){
         $productId = $request->input('productId');
         $productCount = $request->input('productCount');
+
+
 
         $update = Basket::where('productId',$productId)->where('userId',Cookie::get('userKey'))->first();
         $update->productCount = $productCount;

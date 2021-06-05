@@ -183,6 +183,21 @@ class AdminPagesController extends Controller
         return view('admin.retailОrders', $arr);
     }
 
+    public function getSinglRetailOrdersList($id=null){
+        $noReadedMessagesCount = Message::where('readState', 'no readed')->count();
+        $pageCategory = "retailOrders";
+        $pageNumber = "retailOrdersList";
+        $userOrder = UserOrder::where('id',$id)->get();
+        $arr = [
+            'pageNumber' => $pageNumber,
+            'noReadedMessagesCount' => $noReadedMessagesCount,
+            'pageCategory' => $pageCategory,
+            'userOrder' => $userOrder,
+        ];
+        //return $id;
+        return view('admin.singlRetailOrder', $arr);
+    }
+
     public function getWholesalerOrdersList()
     {
         $noReadedMessagesCount = Message::where('readState', 'no readed')->count();

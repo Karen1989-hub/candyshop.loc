@@ -10,7 +10,7 @@ use App\Models\User;
 class Product extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','price','calculateType','category','description','imgName'];
+    protected $fillable = ['title','price','calculateType','category','description','imgName','countInStock'];
 
     public function category(){
         return $this->belongsTo('App\Models\Product');

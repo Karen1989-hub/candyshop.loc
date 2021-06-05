@@ -25,12 +25,12 @@ use App\Http\Controllers\OrdersController;
 |
 */
 Route::fallback(function (){return abort('404');});
+Route::get('errorAboutCountInStock',[ShopPageController::class,'getErrorAboutCountInStockPage'])->name('errorAboutCountInStock');
 Route::get('/',[FrontPagesControllers::class,'getHomePage'])->name('home');
 Route::get('/shop',[FrontPagesControllers::class,'getShopPage'])->name('shop');
 Route::get('/shop/{category}',[FrontPagesControllers::class,'getShopPage']);
 Route::get('/shopDetail/{id}',[FrontPagesControllers::class,'getDetailShopPage']);
 Route::get('/getOrderPage',[FrontPagesControllers::class,'getOrderPage'])->name('getOrderPage');
-
 Route::get('/aboutUs',[FrontPagesControllers::class,'getAboutUsPage'])->name('aboutUs');
 Route::get('/awards',[FrontPagesControllers::class,'getАwardsPage'])->name('awards');
 Route::get('/news',[FrontPagesControllers::class,'getNewsPage'])->name('news');
@@ -57,6 +57,7 @@ Route::prefix('/admin')->group(function (){
     Route::get('/deleteMessage/{id}',[MessagesController::class,'deleteMessage'])->middleware('admin')->name('deleteMessage');
     Route::get('/getSingleMessage/{id}',[MessagesController::class,'getSingleMessage'])->middleware('admin')->name('getSingleMessage');
     Route::get('/getRetailOrdersList',[AdminPagesController::class,'getRetailOrdersList'])->middleware('admin')->name('getRetailOrdersList');
+    Route::get('/getSinglRetailOrdersList/{id}',[AdminPagesController::class,'getSinglRetailOrdersList'])->middleware('admin')->name('getSinglRetailOrdersList');
     Route::get('/getWholesalerOrdersList',[AdminPagesController::class,'getWholesalerOrdersList'])->middleware('admin')->name('getWholesalerOrdersList');
     Route::get('/getWholesalersRegistration',[AdminPagesController::class,'getWholesalersRegistration'])->middleware('admin')->name('getWholesalersRegistration');
     Route::post('/createMessage',[MessagesController::class,'createMessage'])->middleware('admin')->name('createMessage');

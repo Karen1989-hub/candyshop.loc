@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Award;
+use App\Models\ContactData;
+use App\Models\Discount;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\Product;
@@ -21,6 +25,7 @@ class ShopPageController extends Controller
         $title = $request->input('title');
         $price = $request->input('price');
         $calculateType = $request->input('calculateType');
+        $countInStock = $request->input('countInStock');
         $category = $request->input('category');
         $text = $request->input('description');
         $file = $request->file('uploadImg');
@@ -45,7 +50,7 @@ class ShopPageController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        Product::create(['title' => $title, 'price' => $price, 'calculateType' => $calculateType, 'category' => $category, 'description' => $text]);
+        Product::create(['title' => $title, 'price' => $price, 'calculateType' => $calculateType,'countInStock' => $countInStock, 'category' => $category, 'description' => $text]);
 
         $maxId = Product::max('id');
         $file->move('images/productsImg', $maxId . ".jpg");
@@ -73,13 +78,28 @@ class ShopPageController extends Controller
         if ($adminKey == 'ak587238') {
             $productId = $request->input('productId');
             $price = $request->input('price');
+            $countInStock = $request->input('countInStock');
             $update = Product::find($productId);
             $update->price = $price;
+            $update->countInStock = $countInStock;
             $update->save();
             return back();
-
         } else {
             return abort('404');
         }
+    }
+
+    public function getErrorAboutCountInStockPage(){
+        $autorizedUser = User::find(Cookie::get('userKey'));
+        $arr = [
+            'autorizedUser' => $autorizedUser,
+            'discount' => Discount::all(),
+            'frontPageName' => 'shop',
+            'basketAllProductsCount' => User::find(Cookie::get('userKey'))->getBasketProducts()->count(),
+            'basketProducts' => User::find(Cookie::get('userKey'))->getBasketProducts(),
+            'awards' => Award::all(),
+            'contactData' => ContactData::where('id', 1)->get(),
+        ];
+        return view('front.errorAboutCountInStock',$arr);
     }
 }

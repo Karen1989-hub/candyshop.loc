@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('category');
             $table->text('description');
             $table->string('imgName')->nullable();
+            $table->string('countInStock')->default(0);
             $table->timestamps();
         });
     }

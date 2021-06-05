@@ -30,15 +30,14 @@
                             <input type="number" class="form-control" name="price" value=""
                                    placeholder="Текст...">
                             @if($errors->has('price')) <span style="color: red">{{$errors->first()}}</span> @endif
+                            <label class="form-label">каличество на складе</label>
+                            <input type="number" class="form-control" name="countInStock" value="0"
+                                   placeholder="Текст...">
                             <label class="form-label">Мера изчесления</label>
                             <select name="calculateType" id="select-countries2" class="form-control select2 custom-select">
                                 <option value="1 штука"
                                         data-data='{"image": "https://laravel.spruko.com/adminor/Leftmenu-Icon-DarkSidebar-Dark/assets/images/flags/br.svg"}'>
                                     1 штука
-                                </option>
-                                <option value="100 гр"
-                                        data-data='{"image": "https://laravel.spruko.com/adminor/Leftmenu-Icon-DarkSidebar-Dark/assets/images/flags/cz.svg"}'>
-                                    100 гр
                                 </option>
                                 <option value="1 кг"
                                         data-data='{"image": "https://laravel.spruko.com/adminor/Leftmenu-Icon-DarkSidebar-Dark/assets/images/flags/de.svg"}'>
