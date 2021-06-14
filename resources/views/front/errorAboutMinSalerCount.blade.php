@@ -41,33 +41,7 @@
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
                                 <div class="row">
-                                    @if(count($products)>0)
-                                    @foreach($products as $val)
-                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                            <div class="products-single fix">
-                                                <div class="box-img-hover">
-                                                    <img src="{{asset('images/productsImg/'.$val->imgName)}}" class="img-fluid"
-                                                         alt="Image">
-                                                    <div class="mask-icon">
-                                                        <ul>
-                                                            <li><a href="/shopDetail/{{$val->id}}" data-toggle="tooltip" data-placement="right" title="Детально"><i
-                                                                        class="fas fa-eye"></i></a></li>
-                                                        </ul>
-                                                        <a class="cart" href="/user/addInBasket/{{$val->id}}">В корзину</a>
-                                                    </div>
-                                                </div>
-                                                <div class="why-text">
-                                                    <h4>{{$val->title}}<br>
-                                                        <span style="float: right;font-size: 0.8em">в наличии: {{$val->countInStock}}</span>
-                                                    </h4>
-                                                    <h5>{{$val->price}}</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                    @else
-                                        <h2 style="margin: 50px auto">Нечего не найденно</h2>
-                                    @endif
+                                    <h2 style="margin: 50px auto">минимальное количество для оптовиков {{$minSaleCountForWholesaler}}</h2>
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="list-view">
@@ -212,31 +186,12 @@
             <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
                 <div class="product-categori">
                     <div class="search-product">
-                        <form action="{{route('getDetailShopPage2')}}" method="get">
-                            <input class="form-control" name="title" placeholder="@if($searchError!=null) {{$searchError}} @else Поиск . . . @endif" type="text">
+                        <form action="#">
+                            <input class="form-control" placeholder="Поиск . . ." type="text">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
-                    <div class="filter-sidebar-left">
-                        <div class="title-left">
-                            <h3>Категории</h3>
-                        </div>
-                        <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men"
-                             data-children=".sub-men">
-                            @foreach($categories as $val)
-                            <a href="/shop/{{$val->id}}" class="list-group-item list-group-item-action">{{$val->title}}<small class="text-muted"> ({{$val->getProductCount()}}) </small></a>
-                            @endforeach
-                        </div>
-                        <hr>
-                        <p>Филтр по цене</p>
-                        <form action="{{route('shop')}}" method="get">
-                        <label for="">Мин.</label><br>
-                        <input type="number" name="minPrice"><br>
-                        <label for="">Макс.</label><br>
-                        <input type="number" name="maxPrice"><br>
-                        <input type="submit" value="Найти" style="margin-top: 10px;cursor: pointer;">
-                        </form>
-                    </div>
+
 
                 </div>
             </div>

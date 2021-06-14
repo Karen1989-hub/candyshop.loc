@@ -35,26 +35,22 @@
                 <div class="title-left">
                     <h3>Вход в акаунт</h3>
                 </div>
-                <h5><a data-toggle="collapse" href="#formLogin" role="button" aria-expanded="false">Нажмите сюда для
-                        введения логина</a></h5>
+                <h5><a data-toggle="collapse" href="#formLogin" role="button" aria-expanded="false">Нажмите сюда для введения логина</a></h5>
                 <form action="{{route('signIn')}}" method="post" class="mt-3 collapse review-form-box" id="formLogin">
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="InputEmail" class="mb-0">Логин</label>
-                            <input type="text" name="login" class="form-control" id="InputEmail"
-                                   placeholder="Введите логин">
+                            <input type="text" name="login" class="form-control" id="InputEmail" placeholder="Введите логин">
                             @if($errors->has('login')) <span style="color: red">{{$errors->first()}}</span> @endif
                         </div>
                         <div class="form-group col-md-6">
                             <label for="InputPassword" class="mb-0">Пароль</label>
-                            <input type="password" name="password" class="form-control" id="InputPassword"
-                                   placeholder="Введите пароль">
+                            <input type="password" name="password" class="form-control" id="InputPassword" placeholder="Введите пароль">
                             @if($errors->has('password')) <span style="color: red">{{$errors->first()}}</span> @endif
                         </div>
                     </div>
-                    @if($userRegistrationError != null) <span
-                        style="color: red">{{$userRegistrationError}}</span> @endif
+                    @if($userRegistrationError != null) <span style="color: red">{{$userRegistrationError}}</span> @endif
                     <button type="submit" class="btn hvr-hover">Вход</button>
                 </form>
             </div>
@@ -62,58 +58,48 @@
                 <div class="title-left">
                     <h3>Регистрация</h3>
                 </div>
-                <h5><a data-toggle="collapse" href="#formRegister" role="button" aria-expanded="false">Для регистрации
-                        нажмите сюда</a></h5>
-                <form action="{{route('createUser')}}" method="post" class="mt-3 collapse review-form-box"
-                      id="formRegister">
+                <h5><a data-toggle="collapse" href="#formRegister" role="button" aria-expanded="false">Для регистрации нажмите сюда</a></h5>
+                <form action="{{route('createUser')}}" method="post" class="mt-3 collapse review-form-box" id="formRegister">
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="InputName" class="mb-0">Имя</label>
-                            <input type="text" name="firstName" class="form-control" id="InputName"
-                                   placeholder="Введите имя">
+                            <input type="text" name="firstName" class="form-control" id="InputName" placeholder="Введите имя">
                             @if($errors->has('firstName')) <span style="color:red">{{$errors->first()}}</span> @endif
                         </div>
                         <div class="form-group col-md-6">
                             <label for="InputLastname" class="mb-0">Фамилие</label>
-                            <input type="text" name="lastName" class="form-control" id="InputLastname"
-                                   placeholder="Введите фамилие">
+                            <input type="text" name="lastName" class="form-control" id="InputLastname" placeholder="Введите фамилие">
                             @if($errors->has('lastName')) <span style="color:red">{{$errors->first()}}</span> @endif
                         </div>
                         <div class="form-group col-md-6">
                             <label for="InputEmail1" class="mb-0">Эл. почта</label>
-                            <input type="email" name="email" class="form-control" id="InputEmail2"
-                                   placeholder="Введите эл. почту">
+                            <input type="email" name="email" class="form-control" id="InputEmail2" placeholder="Введите эл. почту">
                             @if($errors->has('email')) <span style="color:red">{{$errors->first()}}</span> @endif
                         </div>
                         <div class="form-group col-md-6">
                             <label for="InputPassword1" class="mb-0">Телефон</label>
-                            <input type="text" name="telephon" class="form-control" id="InputPassword1"
-                                   placeholder="повторите пароль">
+                            <input type="text" name="telephon" class="form-control" id="InputPassword1" placeholder="повторите пароль">
                             @if($errors->has('telephon')) <span style="color:red">{{$errors->first()}}</span> @endif
                         </div>
                         <div class="form-group col-md-6">
                             <label for="InputPassword1" class="mb-0">Пароль</label>
-                            <input type="password" name="password" class="form-control" id="InputPassword2"
-                                   placeholder="Введите пароль">
+                            <input type="password" name="password" class="form-control" id="InputPassword2" placeholder="Введите пароль">
                             @if($errors->has('password')) <span style="color:red">{{$errors->first()}}</span> @endif
                         </div>
                         <div class="form-group col-md-6">
                             <label for="InputEmail1" class="mb-0">Логин</label>
-                            <input type="text" name="login" class="form-control" id="InputEmail1"
-                                   placeholder="Введите логин">
+                            <input type="text" name="login" class="form-control" id="InputEmail1" placeholder="Введите логин">
                             @if($errors->has('login')) <span style="color:red">{{$errors->first()}}</span> @endif
                         </div>
                         <div class="form-group col-md-6">
                             <label for="InputPassword1" class="mb-0">Павтор пароля</label>
-                            <input type="password" name="password_confirmation" class="form-control" id="InputPassword1"
-                                   placeholder="повторите пароль">
-                            @if($errors->has('password_confirmation')) <span
-                                style="color:red">{{$errors->first()}}</span> @endif
+                            <input type="password" name="password_confirmation" class="form-control" id="InputPassword1" placeholder="повторите пароль">
+                            @if($errors->has('password_confirmation')) <span style="color:red">{{$errors->first()}}</span> @endif
                         </div>
                         <div class="form-group col-md-6">
                             <input type="hidden" name="userType" class="form-control" id="InputPassword1"
-                                   value="retail">
+                                   value="wholesaler">
                         </div>
 
                     </div>

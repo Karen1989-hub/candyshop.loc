@@ -55,6 +55,7 @@ class FrontPagesControllers extends Controller
         $homePageSlider = HomePageSlider::all();
         $categories = Category::all();
         $row = $this->getInclud();
+        $product8 = Product::all();
         $arr = ['frontPageName' => $frontPageName,
             'discount' => $row['discount'],
             'homePageSlider' => $homePageSlider,
@@ -65,6 +66,7 @@ class FrontPagesControllers extends Controller
             'basketAllProductsCount' => $row['basketAllProductsCount'],
             'getBasketAllProductsPrice' => $row['getBasketAllProductsPrice'],
             'autorizedUser' => $row['autorizedUser'],
+            'product8' => $product8,
         ];
 //         function getSiPr($id){
 //            $n = Basket::where('userId',Cookie::get('userKey'))->where('productId',$id)->get();
@@ -75,12 +77,20 @@ class FrontPagesControllers extends Controller
         return view('front.home', $arr);
     }
 
-    public function getShopPage($category = "all")
+    public function getShopPage(Request $request,$category = "all")
     {
+        $minPrice = $request->input('minPrice');
+        $maxPrice = $request->input('maxPrice');
         $row = $this->getInclud();
         $frontPageName = 'shop';
         $categories = Category::all();
-        if ($category == "all") {
+        if ($category == "all" && $minPrice != "" && $maxPrice != "") {
+            $products = Product::where('price','>',$minPrice)->where('price','<',$maxPrice)->get();
+        } else if($category == "all" && $minPrice != ""){
+            $products = Product::where('price','>',$minPrice)->get();
+        } else if($category == "all" && $maxPrice != "") {
+            $products = Product::where('price', '<', $maxPrice)->get();
+        } else if($category == "all"){
             $products = Product::all();
         } else {
             $products = Product::where('category', $category)->get();
@@ -94,6 +104,7 @@ class FrontPagesControllers extends Controller
             'basketAllProductsCount' => $row['basketAllProductsCount'],
             'getBasketAllProductsPrice' => $row['getBasketAllProductsPrice'],
             'autorizedUser' => $row['autorizedUser'],
+            'searchError' => null,
             'categories' => $categories];
         return view('front.shop', $arr);
     }
@@ -120,8 +131,62 @@ class FrontPagesControllers extends Controller
             'getBasketAllProductsPrice' => $row['getBasketAllProductsPrice'],
             'autorizedUser' => $row['autorizedUser'],
             'singlProductCount' => $singlProductCount,
+            'searchError' => null,
             'singlProduct' => $singlProduct];
         return view('front.shopDetail', $arr);
+    }
+    public function getDetailShopPage2(Request $request){
+        $title = $request->input('title');
+
+        $singlProduct = Product::where('title',$title)->get();
+
+        if(count($singlProduct)>0){
+            $searchError = null;
+            $id = $singlProduct[0]->id;
+
+            $row = $this->getInclud();
+            $frontPageName = 'shop';
+            $singlProduct = Product::where('id', $id)->get();
+            if (Cookie::get('userKey') != null) {
+                $singlProductCount = Basket::where('userId', Cookie::get('userKey'))->where('productId', $id)->first();
+            } else {
+                $singlProductCount = null;
+            }
+
+            $arr = ['frontPageName' => $frontPageName,
+                'discount' => $row['discount'],
+                'contactData' => $row['contactData'],
+                'awards' => $row['awards'],
+                'basketProducts' => $row['basketProducts'],
+                'basketAllProductsCount' => $row['basketAllProductsCount'],
+                'getBasketAllProductsPrice' => $row['getBasketAllProductsPrice'],
+                'autorizedUser' => $row['autorizedUser'],
+                'singlProductCount' => $singlProductCount,
+                'searchError' => $searchError,
+                'singlProduct' => $singlProduct];
+            return view('front.shopDetail', $arr);
+        } else {
+            $searchError = "нечего не найденно";
+            $row = $this->getInclud();
+            $frontPageName = 'shop';
+            $arr = [
+                'frontPageName' => $frontPageName,
+                'discount' => $row['discount'],
+                'contactData' => $row['contactData'],
+                'awards' => $row['awards'],
+                'basketProducts' => $row['basketProducts'],
+                'basketAllProductsCount' => $row['basketAllProductsCount'],
+                'getBasketAllProductsPrice' => $row['getBasketAllProductsPrice'],
+                'autorizedUser' => $row['autorizedUser'],
+//                'singlProductCount' => $singlProductCount,
+                'searchError' => $searchError,
+                'singlProduct' => $singlProduct];
+            return view('front.shopDetail', $arr);
+        }
+
+
+
+
     }
 
     public function getOrderPage(){
@@ -246,5 +311,26 @@ class FrontPagesControllers extends Controller
             'userRegistrationError' => $userRegistrationError,
         ];
         return view('front.userRegistration', $arr);
+    }
+
+    public function wholesalerRegistration(){
+        $frontPageName = 'contactUs';
+        $row = $this->getInclud();
+        if (Cookie::get('userRegistrationError') != false) {
+            $userRegistrationError = Cookie::get('userRegistrationError');
+        } else {
+            $userRegistrationError = null;
+        }
+        $arr = ['frontPageName' => $frontPageName,
+            'discount' => $row['discount'],
+            'awards' => $row['awards'],
+            'contactData' => $row['contactData'],
+            'basketProducts' => $row['basketProducts'],
+            'basketAllProductsCount' => $row['basketAllProductsCount'],
+            'getBasketAllProductsPrice' => $row['getBasketAllProductsPrice'],
+            'autorizedUser' => $row['autorizedUser'],
+            'userRegistrationError' => $userRegistrationError,
+        ];
+        return view('front.wholesalerRegistration', $arr);
     }
 }

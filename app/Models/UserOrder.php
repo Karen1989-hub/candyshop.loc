@@ -9,7 +9,7 @@ use App\Models\User;
 class UserOrder extends Model
 {
     use HasFactory;
-    protected $fillable = ['userId','payment','status'];
+    protected $fillable = ['userId','payment','status','userType'];
 
     public function getOrdersUser(){
         return $this->hasMany(User::class,'id','userId')->first();

@@ -85,7 +85,7 @@
                         </div>
 
                         <a class="dropdown-item" href="{{route('goOut')}}">
-                            <i class="dropdown-icon mdi  mdi-logout-variant"></i> Դուրս գալ
+                            <i class="dropdown-icon mdi  mdi-logout-variant"></i> Выход
                         </a>
                     </div>
                 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Restrictions;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Validator;
@@ -21,6 +22,8 @@ class userController extends Controller
         $password = $request->input('password');
         $telephon = $request->input('telephon');
         $password_confirmation = $request->input('password_confirmation');
+        $userType = $request->input('userType');
+
 
         $validator = Validator::make($request->all(),
             [
@@ -52,7 +55,9 @@ class userController extends Controller
         }
 
         $password = Hash::make($password);
-        User::create(['firstName' => $firstName, 'lastName' => $lastName, 'email' => $email,'telephon'=>$telephon, 'login' => $login, 'password' => $password]);
+        User::create(['firstName' => $firstName, 'lastName' => $lastName, 'email' => $email,'telephon'=>$telephon, 'login' => $login, 'password' => $password, 'userType' => $userType]);
+        $thisUser = User::find(User::max('id'));
+        Cookie::queue('userType',$thisUser->userType);
 
         Cookie::queue('userKey', User::max('id'), 1440);
         return back();
@@ -60,6 +65,7 @@ class userController extends Controller
 
     public function signUp()
     {
+        Cookie::queue(Cookie::forget('userType'));
         Cookie::queue(Cookie::forget('userKey'));
         return back();
     }
@@ -88,6 +94,7 @@ class userController extends Controller
         if (count($row) > 0) {
             if (Hash::check($password, $row[0]->password)) {
                 Cookie::queue('userKey', $row[0]->id, 1440);
+                Cookie::queue('userType',$row[0]->userType,1440);
                 Cookie::queue(Cookie::forget('userRegistrationError'));
                 return back();
             } else {
@@ -107,39 +114,78 @@ class userController extends Controller
                 return back();
             } else {
                 $countInStock = Product::where('id',$id)->first()->countInStock;
+                $userType = Cookie::get('userType');
                 //ստուգում և հանւմ եմ ապրանքը պահեստից
-                if($countInStock - 1 >= 0){
-                    Basket::create(['userId'=>Cookie::get('userKey'),'productId'=>$id]);
-                    $update = Product::find($id);
-                    $update->countInStock = $countInStock - 1;
-                    $update->save();
-                    return back();
+                if($userType == 'retail'){
+                    if($countInStock - 1 >= 0){
+                        Basket::create(['userId'=>Cookie::get('userKey'),'productId'=>$id]);
+                        $update = Product::find($id);
+                        $update->countInStock = $countInStock - 1;
+                        $update->save();
+                        return back();
+                    } else {
+                        return redirect()->route('errorAboutCountInStock');
+                    }
                 } else {
-                    return redirect()->route('errorAboutCountInStock');
+                    $minSaleCountForWholesaler = Restrictions::find(1)->minSaleCountForWholesaler;
+
+                    if($countInStock - $minSaleCountForWholesaler >= 0){
+                        Basket::create(['userId'=>Cookie::get('userKey'),'productId'=>$id,'productCount'=>$minSaleCountForWholesaler]);
+                        $update = Product::find($id);
+                        $update->countInStock = $countInStock - $minSaleCountForWholesaler;
+                        $update->save();
+                        return back();
+                    } else {
+                        return redirect()->route('errorAboutCountInStock');
+                    }
                 }
 
             }
-
         } else {
             return redirect()->route('userRegistrationPage');
         }
     }
 
     public function updateInBasket(Request $request){
+
         $productId = $request->input('productId');
         $productCount = $request->input('productCount');
+        $userType = Cookie::get('userType');
 
+        if($userType == 'wholesaler'){
+            $minSaleCountForWholesaler = Restrictions::find(1)->minSaleCountForWholesaler;
+            //$minSaleCountForWholesaler = 10;
+            if($productCount<$minSaleCountForWholesaler){
+                return redirect()->route('errorAboutMinSalerCount');
+            }
+        }
 
+        $countInStock = Product::where('id',$productId)->first()->countInStock;
+        if(($countInStock - $productCount) >= 0){
+            $productCountNow = Basket::where('productId',$productId)->where('userId',Cookie::get('userKey'))->first()->productCount;
+            $update = Basket::where('productId',$productId)->where('userId',Cookie::get('userKey'))->first();
+            $update->productCount = $productCountNow + $productCount;
+            $update->save();
 
-        $update = Basket::where('productId',$productId)->where('userId',Cookie::get('userKey'))->first();
-        $update->productCount = $productCount;
-        $update->save();
-        return back();
+            $update2 = Product::where('id',$productId)->first();
+            $update2->countInStock = $countInStock - $productCount;
+            $update2->save();
+            return back();
+        } else {
+            return redirect()->route('errorAboutCountInStock');
+        }
     }
 
-    public function deleteInBasket($id){
+    public function deleteInBasket($id,$count){
+
         $userId = Cookie::get('userKey');
         Basket::where('userId',$userId)->where('productId',$id)->delete();
+        $countInStock = Product::find($id)->countInStock;
+
+        $update = Product::find($id);
+        $update->countInStock = $count + $countInStock;
+        $update->save();
+
         return back();
     }
 }

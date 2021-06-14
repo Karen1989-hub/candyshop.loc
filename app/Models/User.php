@@ -11,7 +11,7 @@ use App\Models\Basket;
 class User extends Model
 {
     use HasFactory;
-    protected $fillable = ['firstName','lastName','email','login','password','telephon'];
+    protected $fillable = ['firstName','lastName','email','login','password','telephon','userType'];
 
     public function getBasketProducts(){
         return $this->belongsToMany(Product::class,'baskets','userId','productId')->get();

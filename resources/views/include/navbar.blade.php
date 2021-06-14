@@ -31,6 +31,9 @@
                     <li class="nav-item @if($frontPageName=='contactUs') active @endif"><a class="nav-link"
                                                                                            href="{{route('contactUs')}}">Контакты</a>
                     </li>
+                    <li class="nav-item @if($frontPageName=='contactUs') active @endif"><a class="nav-link"
+                                                                                           href="/user/signUp">выход</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -38,7 +41,7 @@
             <!-- Start Atribute Navigation -->
             <div class="attr-nav">
                 <ul>
-                    <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+{{--                    <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>--}}
                     <li class="side-menu">
                         <a href="#">
                             <i class="fa fa-shopping-bag"></i>
@@ -60,7 +63,7 @@
                         @php $price = 0; @endphp
                         @foreach($basketProducts as $val)
                             <li>
-                                <a href="#" class="photo"><img src="images/productsImg/{{$val->imgName}}"
+                                <a href="#" class="photo"><img src="../images/productsImg/{{$val->imgName}}"
                                                                class="cart-thumb"
                                                                alt=""/></a>
                                 <h6><a href="#">{{$val->title}}</a></h6>

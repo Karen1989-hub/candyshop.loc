@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Models\Product;
 use Illuminate\Support\Facades\Cookie;
+use App\Models\Restrictions;
 
 //        $adminKey= Cookie::get('adminKey');
 //        if ($adminKey == 'ak587238') {
@@ -21,7 +22,6 @@ class ShopPageController extends Controller
 {
     public function createProduct(Request $request)
     {
-
         $title = $request->input('title');
         $price = $request->input('price');
         $calculateType = $request->input('calculateType');
@@ -29,7 +29,6 @@ class ShopPageController extends Controller
         $category = $request->input('category');
         $text = $request->input('description');
         $file = $request->file('uploadImg');
-
 
         $validator = Validator::make($request->all(),
             ['title' => 'required|max:50',
@@ -101,5 +100,20 @@ class ShopPageController extends Controller
             'contactData' => ContactData::where('id', 1)->get(),
         ];
         return view('front.errorAboutCountInStock',$arr);
+    }
+
+    public function errorAboutMinSalerCount(){
+        $autorizedUser = User::find(Cookie::get('userKey'));
+        $arr = [
+            'autorizedUser' => $autorizedUser,
+            'discount' => Discount::all(),
+            'frontPageName' => 'shop',
+            'basketAllProductsCount' => User::find(Cookie::get('userKey'))->getBasketProducts()->count(),
+            'basketProducts' => User::find(Cookie::get('userKey'))->getBasketProducts(),
+            'awards' => Award::all(),
+            'contactData' => ContactData::where('id', 1)->get(),
+            'minSaleCountForWholesaler' => Restrictions::find(1)->minSaleCountForWholesaler,
+        ];
+        return view('front.errorAboutMinSalerCount',$arr);
     }
 }

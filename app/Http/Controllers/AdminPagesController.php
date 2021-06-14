@@ -16,6 +16,7 @@ use App\Models\News;
 use App\Models\Message;
 use App\Models\UserOrder;
 use App\Models\UserOrderProduct;
+use App\Models\Restrictions;
 
 
 class AdminPagesController extends Controller
@@ -173,7 +174,7 @@ class AdminPagesController extends Controller
         $noReadedMessagesCount = Message::where('readState', 'no readed')->count();
         $pageCategory = "retailOrders";
         $pageNumber = "retailOrdersList";
-        $userOrder = UserOrder::all();
+        $userOrder = UserOrder::where('userType','retail')->get();
         $arr = [
             'pageNumber' => $pageNumber,
             'noReadedMessagesCount' => $noReadedMessagesCount,
@@ -203,10 +204,35 @@ class AdminPagesController extends Controller
         $noReadedMessagesCount = Message::where('readState', 'no readed')->count();
         $pageCategory = "wholesalerOrders";
         $pageNumber = "wholesalerOrdersList";
+        $userOrder = UserOrder::where('userType','wholesaler')->get();
         $arr = ['pageNumber' => $pageNumber,
             'noReadedMessagesCount' => $noReadedMessagesCount,
-            'pageCategory' => $pageCategory];
+            'pageCategory' => $pageCategory,
+            'userOrder' => $userOrder,
+            ];
         return view('admin.wholesalerОrders', $arr);
+    }
+
+    public function getWholesaleRestrictions(){
+        $noReadedMessagesCount = Message::where('readState', 'no readed')->count();
+        $pageCategory = "wholesalerOrders";
+        $pageNumber = "wholesalerRestrictions";
+        $minSaleCountForWholesaler = Restrictions::find(1)->minSaleCountForWholesaler;
+
+        $arr = ['pageNumber' => $pageNumber,
+            'noReadedMessagesCount' => $noReadedMessagesCount,
+            'pageCategory' => $pageCategory,
+            'minSaleCountForWholesaler' => $minSaleCountForWholesaler,
+        ];
+        return view('admin.wholesaleRestrictions', $arr);
+    }
+
+    public function updateMinSaleCountForWholesaler(Request $request){
+        $newData = $request->input('count');
+        $update = Restrictions::find(1);
+        $update->minSaleCountForWholesaler = $newData;
+        $update->save();
+        return back();
     }
 
     public function getWholesalersRegistration()

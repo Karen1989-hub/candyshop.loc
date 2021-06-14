@@ -100,6 +100,9 @@
                 <li @if($pageNumber == 'wholesalerOrdersList')class="active"@endif>
                     <a href="{{route('getWholesalerOrdersList')}}" class="slide-item">Список заказов</a>
                 </li>
+                <li @if($pageNumber == 'wholesalerRestrictions')class="activ"@endif>
+                    <a href="{{route('getWholesaleRestrictions')}}" class="slide-item">Ограничения для оптовиков</a>
+                </li>
             </ul>
         </li>
         <li class="slide">

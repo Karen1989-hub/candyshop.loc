@@ -31,6 +31,7 @@ Karen
                                 <th>Дата</th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -47,12 +48,20 @@ Karen
                                     <td>{{$val->getOrdersUser()->telephon}}</td>
                                     <td>{{$val->deliveryAddress}}</td>
                                     <td>{{$val->payment}}</td>
-                                    <td>{{$val->status}}</td>
+                                    <td>
+                                    @if($val->status == 'pending')
+                                        <span style="color: yellow">в ожидании</span>
+                                        @else
+                                        <span style="color: green">завершено</span>
+                                        @endif
+                                    </td>
                                     <td>{{$val->created_at}}</td>
                                     <td><a href="/admin/getSinglRetailOrdersList/{{$val->id}}" class="btn btn-outline-success">Прочитать</a>
                                     </td>
-                                    <td><a href="/admin/deleteMessage/"
+                                    <td><a href="/user/deleteUserOrder/{{$val->id}}"
                                            class="btn btn-outline-danger">Удалить</a></td>
+                                    <td><a href="/user/updateUserOrderStatus/{{$val->id}}"
+                                           class="btn btn-outline-warning">Завершить</a></td>
                                 </tr>
                             @endforeach
                             </tbody>

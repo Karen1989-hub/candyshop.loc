@@ -69,8 +69,8 @@
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="right-phone-box">
                     @if($autorizedUser == null)
-                    <p><a href="checkoutBaza.html">Вход для оптовиков</a><span class="opasit">._._.</span><a
-                            href="{{route('userRegistrationPage')}}">Вход | Регистрация</a><span
+                    <p><a href="{{route('wholesalerRegistration')}}">Вход для оптовиков</a><span class="opasit">._._.</span><a
+                            href="{{route('userRegistrationPage')}}">Pозничная торговля</a><span
                             class="opasit">._._.</span><a href="#"></a></p>
                     @endif
                 </div>

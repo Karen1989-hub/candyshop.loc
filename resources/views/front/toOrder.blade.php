@@ -77,7 +77,7 @@
                                             &#8381</p>
                                     </td>
                                     <td class="remove-pr">
-                                        <a href="/user/deleteInBasket/{{$val->id}}">
+                                        <a href="/user/deleteInBasket/{{$val->id}}/{{$val->getProductInBasketCount()->productCount}}">
                                             <i class="fas fa-times"></i>
                                         </a>
                                     </td>
@@ -131,8 +131,9 @@
             </div>
             <input class="form-control w-50 " id="address1" style="float: right"  placeholder="Введите адрес доставки" aria-label="Coupon code"
                    type="text">
-            <div class="col-12 d-flex shopping-box"><a href="checkout.html" class="ml-auto btn hvr-hover">Оплатить
-                    сейчас</a></div>
+
+{{--            <div class="col-12 d-flex shopping-box"><a href="checkout.html" class="ml-auto btn hvr-hover">Оплатить--}}
+{{--                    сейчас</a></div>--}}
 
                 <div class="col-12 shopping-box mt-1">
                     <form action="{{route('createUserOrder')}}" method="post">

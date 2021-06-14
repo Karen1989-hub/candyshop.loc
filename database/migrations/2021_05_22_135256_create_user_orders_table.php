@@ -16,6 +16,7 @@ class CreateUserOrdersTable extends Migration
         Schema::create('user_orders', function (Blueprint $table) {
             $table->id();
             $table->string('userId');
+            $table->string('userType');
             $table->string('payment')->default('null');
             $table->string('status')->default('pending');
             $table->string('deliveryAddress')->default('null');

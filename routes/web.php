@@ -26,10 +26,12 @@ use App\Http\Controllers\OrdersController;
 */
 Route::fallback(function (){return abort('404');});
 Route::get('errorAboutCountInStock',[ShopPageController::class,'getErrorAboutCountInStockPage'])->name('errorAboutCountInStock');
+Route::get('errorAboutMinSalerCount',[ShopPageController::class,'errorAboutMinSalerCount'])->name('errorAboutMinSalerCount');
 Route::get('/',[FrontPagesControllers::class,'getHomePage'])->name('home');
 Route::get('/shop',[FrontPagesControllers::class,'getShopPage'])->name('shop');
 Route::get('/shop/{category}',[FrontPagesControllers::class,'getShopPage']);
 Route::get('/shopDetail/{id}',[FrontPagesControllers::class,'getDetailShopPage']);
+Route::get('/shopDetail',[FrontPagesControllers::class,'getDetailShopPage2'])->name('getDetailShopPage2');
 Route::get('/getOrderPage',[FrontPagesControllers::class,'getOrderPage'])->name('getOrderPage');
 Route::get('/aboutUs',[FrontPagesControllers::class,'getAboutUsPage'])->name('aboutUs');
 Route::get('/awards',[FrontPagesControllers::class,'getАwardsPage'])->name('awards');
@@ -38,6 +40,8 @@ Route::get('/singlNews/1',[FrontPagesControllers::class,'getSinglNews'])->name('
 Route::get('/contactUs',[FrontPagesControllers::class,'getContactUsPage'])->name('contactUs');
 Route::get('/admin',[AdminLoginController::class,'getAdminLoginPage'])->name('getAdminLoginPage');
 Route::get('/userRegistrationPage',[FrontPagesControllers::class,'userRegistrationPage'])->name('userRegistrationPage');
+Route::get('/wholesalerRegistration',[FrontPagesControllers::class,'wholesalerRegistration'])->name('wholesalerRegistration');
+
 
 Route::prefix('/admin')->group(function (){
     Route::post('/checkAdminLogin',[AdminLoginController::class,'checkAdminLogin'])->name('checkAdminLogin');
@@ -59,6 +63,9 @@ Route::prefix('/admin')->group(function (){
     Route::get('/getRetailOrdersList',[AdminPagesController::class,'getRetailOrdersList'])->middleware('admin')->name('getRetailOrdersList');
     Route::get('/getSinglRetailOrdersList/{id}',[AdminPagesController::class,'getSinglRetailOrdersList'])->middleware('admin')->name('getSinglRetailOrdersList');
     Route::get('/getWholesalerOrdersList',[AdminPagesController::class,'getWholesalerOrdersList'])->middleware('admin')->name('getWholesalerOrdersList');
+    Route::get('/getWholesaleRestrictions',[AdminPagesController::class,'getWholesaleRestrictions'])->middleware('admin')->name('getWholesaleRestrictions');
+    Route::post('/updateMinSaleCountForWholesaler',[AdminPagesController::class,'updateMinSaleCountForWholesaler'])->middleware('admin')->name('updateMinSaleCountForWholesaler');
+
     Route::get('/getWholesalersRegistration',[AdminPagesController::class,'getWholesalersRegistration'])->middleware('admin')->name('getWholesalersRegistration');
     Route::post('/createMessage',[MessagesController::class,'createMessage'])->middleware('admin')->name('createMessage');
     Route::get('/deleteMessage/{id}',[MessagesController::class,'deleteMessage'])->middleware('admin')->name('deleteMessage');
@@ -90,8 +97,10 @@ Route::prefix('/user')->group(function (){
     Route::post('/signIn',[userController::class,'signIn'])->name('signIn');
     Route::get('/addInBasket/{id}',[userController::class,'addInBasket'])->name('addInBasket');
     Route::post('/updateInBasket',[userController::class,'updateInBasket'])->name('updateInBasket');
-    Route::get('/deleteInBasket/{id}',[userController::class,'deleteInBasket'])->name('deleteInBasket');
+    Route::get('/deleteInBasket/{id}/{count}',[userController::class,'deleteInBasket'])->name('deleteInBasket');
     Route::post('/createUserOrder',[OrdersController::class,'createUserOrder'])->name('createUserOrder');
+    Route::get('/updateUserOrderStatus/{id}',[OrdersController::class,'updateUserOrderStatus'])->name('updateUserOrderStatus');
+    Route::get('/deleteUserOrder/{id}',[OrdersController::class,'deleteUserOrder'])->middleware('admin')->name('deleteUserOrder');
 });
 
 

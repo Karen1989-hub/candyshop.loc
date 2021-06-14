@@ -70,7 +70,7 @@
          margin-bottom: 30px;
     }
      .right-phone-box{
-         display: none;
+         /*display: none;*/
     }
 }
 /* mobile or only mobile */
@@ -190,7 +190,7 @@
          top: 15px;
     }
      .right-phone-box{
-         display: none;
+         /*display: none;*/
     }
 	.text-slid-box{
 		display: none;
@@ -239,9 +239,12 @@
          display: none;
     }
      .right-phone-box, .our-link{
-         float: none;
-         text-align: center;
+         /*float: none;*/
+         /*text-align: center;*/
     }
+     .right-phone-box{
+         display: block;
+     }
 .     .filter-button-group button{
          font-size: 14px;
          padding: 5px 18px;
@@ -312,7 +315,7 @@
          margin-bottom: 30px;
     }
      .right-phone-box{
-         display: none;
+         /*display: none;*/
     }
 	.text-slid-box{
 		display: none;
@@ -329,4 +332,3 @@
 		display: none;
 	}
 }
- 

@@ -14,10 +14,11 @@ class OrdersController extends Controller
     public function createUserOrder(Request $request)
     {
         $userId = Cookie::get('userKey');
+        $userType = Cookie::get('userType');
         $address = $request->input('address');
         $payment = $request->input('payment');
 
-        UserOrder::create(['userId'=>$userId,'payment'=>$payment,'deliveryAddress'=>$address]);
+        UserOrder::create(['userId'=>$userId,'userType'=>$userType,'payment'=>$payment,'deliveryAddress'=>$address]);
 
         $maxUserOrderId = UserOrder::max('id');
 
@@ -34,6 +35,18 @@ class OrdersController extends Controller
             ]);
             Basket::where('userId',Cookie::get('userKey'))->delete();
         }
+        return back();
+    }
+
+    public function updateUserOrderStatus($id){
+        $update = UserOrder::find($id);
+        $update->status = "finished";
+        $update->save();
+        return back();
+    }
+
+    public function deleteUserOrder($id){
+        UserOrder::destroy($id);
         return back();
     }
 }
