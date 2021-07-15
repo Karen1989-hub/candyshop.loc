@@ -63,9 +63,10 @@ Route::prefix('/admin')->group(function (){
     Route::get('/getRetailOrdersList',[AdminPagesController::class,'getRetailOrdersList'])->middleware('admin')->name('getRetailOrdersList');
     Route::get('/getSinglRetailOrdersList/{id}',[AdminPagesController::class,'getSinglRetailOrdersList'])->middleware('admin')->name('getSinglRetailOrdersList');
     Route::get('/getWholesalerOrdersList',[AdminPagesController::class,'getWholesalerOrdersList'])->middleware('admin')->name('getWholesalerOrdersList');
+    Route::get('/getSingWholesalerOrders/{id}',[AdminPagesController::class,'singWholesalerOrders'])->middleware('admin')->name('singWholesalerOrders');
+
     Route::get('/getWholesaleRestrictions',[AdminPagesController::class,'getWholesaleRestrictions'])->middleware('admin')->name('getWholesaleRestrictions');
     Route::post('/updateMinSaleCountForWholesaler',[AdminPagesController::class,'updateMinSaleCountForWholesaler'])->middleware('admin')->name('updateMinSaleCountForWholesaler');
-
     Route::get('/getWholesalersRegistration',[AdminPagesController::class,'getWholesalersRegistration'])->middleware('admin')->name('getWholesalersRegistration');
     Route::post('/createMessage',[MessagesController::class,'createMessage'])->middleware('admin')->name('createMessage');
     Route::get('/deleteMessage/{id}',[MessagesController::class,'deleteMessage'])->middleware('admin')->name('deleteMessage');

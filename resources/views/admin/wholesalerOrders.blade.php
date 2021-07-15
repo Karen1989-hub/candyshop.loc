@@ -1,7 +1,6 @@
 @include('include.adminInclude.adminHeader')
 <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 @include('include.adminInclude.adminNavbar')
-Karen
 <!-- Main Content-->
 <div class="app-content  my-3 my-md-5">
     <div class="side-app">
@@ -49,14 +48,14 @@ Karen
                                     <td>{{$val->deliveryAddress}}</td>
                                     <td>{{$val->payment}}</td>
                                     <td>
-                                    @if($val->status == 'pending')
-                                        <span style="color: yellow">в ожидании</span>
+                                        @if($val->status == 'pending')
+                                            <span style="color: yellow">в ожидании</span>
                                         @else
-                                        <span style="color: green">завершено</span>
+                                            <span style="color: green">завершено</span>
                                         @endif
                                     </td>
                                     <td>{{$val->created_at}}</td>
-                                    <td><a href="/admin/getSinglRetailOrdersList/{{$val->id}}" class="btn btn-outline-success">Прочитать</a>
+                                    <td><a href="/admin/getSingWholesalerOrders/{{$val->id}}" class="btn btn-outline-success">Прочитать</a>
                                     </td>
                                     <td><a href="/user/deleteUserOrder/{{$val->id}}"
                                            class="btn btn-outline-danger">Удалить</a></td>

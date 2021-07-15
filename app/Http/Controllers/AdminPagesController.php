@@ -45,7 +45,7 @@ class AdminPagesController extends Controller
             'pageCategory' => $pageCategory,
             'noReadedMessagesCount' => $noReadedMessagesCount,
             'homePageSlider' => $homePageSlider];
-        return view('admin.еditSlider', $arr);
+        return view('admin.editSlider', $arr);
     }
 
     public function getEditProduktCategory()
@@ -181,7 +181,7 @@ class AdminPagesController extends Controller
             'pageCategory' => $pageCategory,
             'userOrder' => $userOrder,
             ];
-        return view('admin.retailОrders', $arr);
+        return view('admin.retailOrders', $arr);
     }
 
     public function getSinglRetailOrdersList($id=null){
@@ -210,7 +210,22 @@ class AdminPagesController extends Controller
             'pageCategory' => $pageCategory,
             'userOrder' => $userOrder,
             ];
-        return view('admin.wholesalerОrders', $arr);
+        return view('admin.wholesalerOrders', $arr);
+    }
+
+    public function singWholesalerOrders($id){
+        $noReadedMessagesCount = Message::where('readState', 'no readed')->count();
+        $pageCategory = "wholesalerOrders";
+        $pageNumber = "wholesalerOrdersList";
+        $userOrder = UserOrder::where('id',$id)->get();
+        $arr = [
+            'pageNumber' => $pageNumber,
+            'noReadedMessagesCount' => $noReadedMessagesCount,
+            'pageCategory' => $pageCategory,
+            'userOrder' => $userOrder,
+        ];
+        //return $id;
+        return view('admin.singlWholesalerOrders', $arr);
     }
 
     public function getWholesaleRestrictions(){
