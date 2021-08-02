@@ -31,7 +31,6 @@
                     <li class="nav-item @if($frontPageName=='contactUs') active @endif"><a class="nav-link"
                                                                                            href="{{route('contactUs')}}">Контакты</a>
                     </li>
-
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
