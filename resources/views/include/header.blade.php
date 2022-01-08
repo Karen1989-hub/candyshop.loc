@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Site Metas -->
-    <title>Freshshop - Ecommerce Bootstrap 4 HTML Template</title>
+    <title>Atag Mak</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <!-- Site CSS -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/shopPagination.css')}}">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
     <!-- Custom CSS -->
@@ -38,7 +39,7 @@
 <div class="main-top">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="col-lg-5 col-md-4 col-sm-12 col-xs-12">
 
                 <div class="right-phone-box">
                     <p>Позванить нам : <a href="#"> +11 900 800 100</a></p>
@@ -47,13 +48,18 @@
                     <ul>
                         <li><a href="#"><i class="fa fa-user s_color"></i>
                                 @if($autorizedUser != null)
-                                    {{$autorizedUser->firstName}} {{$autorizedUser->lastName}}
+                                    {{$autorizedUser->firstName}} {{$autorizedUser->lastName }}
+                                    @if($autorizedUser->userType == 'retail')
+                                        <span style="font-size: 0.8em;"> ( розничная торговля )</span>
+                                    @else
+                                        <span style="font-size: 0.8em;"> ( оптовик )</span>
+                                        @endif
                                 @endif
                             </a></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                 <div class="text-slid-box">
                     <div id="offer-box" class="carouselTicker">
                         <ul class="offer-box">

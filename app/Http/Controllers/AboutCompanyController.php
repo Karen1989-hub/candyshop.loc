@@ -7,6 +7,7 @@ use App\Models\AboutCompany;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Cookie;
 use Validator;
+use App\Models\Galery;
 
 
 class AboutCompanyController extends Controller
@@ -105,5 +106,23 @@ class AboutCompanyController extends Controller
         }
 
     }
+
+    public function createNewGaleryImg(Request $request){
+        $file = $request->file('uploadImg');
+        $imgName = $file->getClientOriginalName();
+        $file->move('images/galery',$imgName);
+        Galery::create(['imgName'=>$imgName]);
+        return back();
+    }
+
+    public function deleteGaleryImg($id){
+        $imgName = Galery::where('id',$id)->first()->imgName;
+       unlink('images/galery/'.$imgName);
+
+       Galery::destroy($id);
+       return back();
+    }
+
+
 
 }

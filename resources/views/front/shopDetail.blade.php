@@ -58,7 +58,10 @@
                         <h5>{{$singlProduct[0]->price}} &#8381</h5>
 
                         <h4>Детальное описание:</h4>
-                        <p>{{$singlProduct[0]->description}}</p>
+                        <p><?php
+                        $description = strip_tags($singlProduct[0]->description);
+                        echo $description;
+                        ?></p>
                         @if($singlProductCount != null)
                             <form action="{{route('updateInBasket')}}" method="post">
                                 @csrf

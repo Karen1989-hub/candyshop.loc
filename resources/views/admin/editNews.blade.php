@@ -6,7 +6,7 @@ Karen
 <div class="app-content  my-3 my-md-5">
     <div class="side-app">
         <div class="page-header">
-            <h4 class="page-title">Добавить/удалит новость</h4>
+            <h4 class="page-title">Добавить/удалить новость</h4>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Новости</a></li>
             </ol>
@@ -22,7 +22,7 @@ Karen
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <label class="form-label">Загаловок новости</label>
+                            <label class="form-label">Заголовок новости</label>
                             <input type="text" class="form-control" name="title" value=""
                                    placeholder="Текст...">
                             @if($errors->has('title')) <span style="color: red">{{$errors->first()}}</span> @endif
@@ -60,7 +60,7 @@ Karen
                             <thead>
                             <tr>
                                 <th>N.</th>
-                                <th>Загаловок</th>
+                                <th>Заголовок</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -70,7 +70,7 @@ Karen
                                 <tr>
                                     <th scope="row"><?php $n++; echo $n; ?></th>
                                     <td>{{$val->title}}</td>
-                                    <th><a href="/frontEdit/deleteNews/{{$val->id}}" class="btn btn-outline-danger" style="float: right">Удалит</a></th>
+                                    <th><a href="/frontEdit/deleteNews/{{$val->id}}" class="btn btn-outline-danger" style="float: right">Удалить</a></th>
                                 </tr>
                             @endforeach
                             </tbody>

@@ -22,10 +22,10 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <label class="form-label">Имя фамилие</label>
+                            <label class="form-label">Имя фамилия</label>
                             <input type="text" class="form-control" name="name" placeholder="Текст...">
                             @if($errors->has('name')) <span style="color: red">{{$errors->first()}}</span> @endif
-                            <label class="form-label">Должнасть<span class="form-label-small ml-3"></span></label>
+                            <label class="form-label">Должность<span class="form-label-small ml-3"></span></label>
                             <input type="text" class="form-control" name="position" placeholder="Текст...">
                             @if($errors->has('position')) <span style="color: red">{{$errors->first()}}</span> @endif
                             <div class="col-lg-4 col-sm-12 mt-5" style="margin: 0 auto">
@@ -56,8 +56,8 @@
                             <thead>
                             <tr>
                                 <th>N.</th>
-                                <th>Имя и Фамилие</th>
-                                <th>Должнасть</th>
+                                <th>Имя и Фамилия</th>
+                                <th>Должность</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -68,7 +68,7 @@
                                     <th scope="row"><?php $n++; echo $n; ?></th>
                                     <td>{{$val->name}}</td>
                                     <td>{{$val->position}}</td>
-                                    <th><a href="/frontEdit/deleteEmployee/{{$val->id}}" class="btn btn-outline-danger" style="float: right">Удалит</a></th>
+                                    <th><a href="/frontEdit/deleteEmployee/{{$val->id}}" class="btn btn-outline-danger" style="float: right">Удалить</a></th>
                                 </tr>
                             @endforeach
                             </tbody>

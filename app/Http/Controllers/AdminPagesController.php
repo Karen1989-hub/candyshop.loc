@@ -17,6 +17,7 @@ use App\Models\Message;
 use App\Models\UserOrder;
 use App\Models\UserOrderProduct;
 use App\Models\Restrictions;
+use App\Models\Galery;
 
 
 class AdminPagesController extends Controller
@@ -45,7 +46,7 @@ class AdminPagesController extends Controller
             'pageCategory' => $pageCategory,
             'noReadedMessagesCount' => $noReadedMessagesCount,
             'homePageSlider' => $homePageSlider];
-        return view('admin.editSlider', $arr);
+        return view('admin.aditSlider', $arr);
     }
 
     public function getEditProduktCategory()
@@ -93,10 +94,11 @@ class AdminPagesController extends Controller
         $noReadedMessagesCount = Message::where('readState', 'no readed')->count();
         $pageCategory = "shop";
         $pageNumber = "shop_2";
-        $products = Product::all();
+        $products = Product::paginate(30);
         $arr = ['pageNumber' => $pageNumber,
             'pageCategory' => $pageCategory,
             'noReadedMessagesCount' => $noReadedMessagesCount,
+            'pageCount' => count(Product::all())/30,
             'products' => $products];
         return view('admin.deleteOrEditProduct', $arr);
     }
@@ -107,10 +109,13 @@ class AdminPagesController extends Controller
         $pageCategory = "aboutUs";
         $pageNumber = "aboutUs_1";
         $companyInfo = AboutCompany::first();
+        $galery = Galery::all();
         $arr = ['pageNumber' => $pageNumber,
             'pageCategory' => $pageCategory,
             'noReadedMessagesCount' => $noReadedMessagesCount,
-            'companyInfo' => $companyInfo];
+            'companyInfo' => $companyInfo,
+            'galery' => $galery,
+            ];
         return view('admin.editCompanyInfo', $arr);
     }
 
@@ -181,7 +186,7 @@ class AdminPagesController extends Controller
             'pageCategory' => $pageCategory,
             'userOrder' => $userOrder,
             ];
-        return view('admin.retailOrders', $arr);
+        return view('admin.retail_orders', $arr);
     }
 
     public function getSinglRetailOrdersList($id=null){
@@ -210,7 +215,7 @@ class AdminPagesController extends Controller
             'pageCategory' => $pageCategory,
             'userOrder' => $userOrder,
             ];
-        return view('admin.wholesalerOrders', $arr);
+        return view('admin.wholesaler_orders', $arr);
     }
 
     public function singWholesalerOrders($id){
@@ -224,7 +229,7 @@ class AdminPagesController extends Controller
             'pageCategory' => $pageCategory,
             'userOrder' => $userOrder,
         ];
-        //return $id;
+
         return view('admin.singlWholesalerOrders', $arr);
     }
 

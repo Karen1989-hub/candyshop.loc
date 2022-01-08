@@ -59,7 +59,7 @@
                                 <tr>
                                     <th scope="row"><?php $n++; echo $n; ?></th>
                                     <td>{{$val->text}}</td>
-                                    <th><a href="/frontEdit/deleteDiscount/{{$val->id}}" class="btn btn-outline-danger" style="float: right">Удалит</a></th>
+                                    <th><a href="/frontEdit/deleteDiscount/{{$val->id}}" class="btn btn-outline-danger" style="float: right">Удалить</a></th>
                                 </tr>
                             @endforeach
 

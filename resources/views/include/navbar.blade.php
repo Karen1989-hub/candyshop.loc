@@ -8,8 +8,8 @@
                         aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="index.html"><img width="25%" style="margin: 0;"
-                                                               src="images2/SusUntitled.png" class="logo" alt=""></a>
+                <a class="navbar-brand" href="{{route('home')}}"><img width="40%" style="margin: 0;"
+                                                               src="{{asset('images/logo.png')}}" class="logo" alt=""></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-menu">
@@ -31,6 +31,7 @@
                     <li class="nav-item @if($frontPageName=='contactUs') active @endif"><a class="nav-link"
                                                                                            href="{{route('contactUs')}}">Контакты</a>
                     </li>
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -60,7 +61,7 @@
                         @php $price = 0; @endphp
                         @foreach($basketProducts as $val)
                             <li>
-                                <a href="#" class="photo"><img src="../images/productsImg/{{$val->imgName}}"
+                                <a href="#" class="photo"><img src="../images/productsImg/{{str_replace("%","",$val->imgName)}}"
                                                                class="cart-thumb"
                                                                alt=""/></a>
                                 <h6><a href="#">{{$val->title}}</a></h6>

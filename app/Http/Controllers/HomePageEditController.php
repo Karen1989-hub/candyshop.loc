@@ -74,6 +74,8 @@ class HomePageEditController extends Controller
 
     public function createCategory(Request $request)
     {
+
+
         $adminKey = Cookie::get('adminKey');
         if ($adminKey == 'ak587238') {
             $title = $request->input('title');
@@ -92,15 +94,16 @@ class HomePageEditController extends Controller
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
             }
+
             Category::create([
                 'title' => $title,
             ]);
 
-            $maxId = Category::max('id');
-            $file->move('images/categoriesImg', $maxId . ".jpg");
-            $update = Category::find($maxId);
-            $update->imgName = $maxId . ".jpg";
-            $update->save();
+                $maxId = Category::max('id');
+                $file->move('images/categoriesImg', $maxId . ".jpg");
+                $update = Category::find($maxId);
+                $update->imgName = $maxId . ".jpg";
+                $update->save();
 
             return redirect()->route('getEditProduktCategory');
         } else {
@@ -114,7 +117,13 @@ class HomePageEditController extends Controller
         if ($adminKey == 'ak587238') {
             $deletedSlide = Category::find($id);
             $deletedFileName = $deletedSlide->imgName;
-            unlink('images/categoriesImg/' . $deletedFileName);
+
+                if($deletedFileName != null){
+                    unlink('images/categoriesImg/' . $deletedFileName);
+                }
+
+
+
 
             Category::destroy($id);
             return redirect()->route('getEditProduktCategory');

@@ -15,7 +15,9 @@ use App\Models\Employee;
 use App\Models\Product;
 use App\Models\News;
 use App\Models\User;
+use App\Models\Galery;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Pagination\Paginator;
 
 class FrontPagesControllers extends Controller
 {
@@ -54,8 +56,9 @@ class FrontPagesControllers extends Controller
         $frontPageName = 'home';
         $homePageSlider = HomePageSlider::all();
         $categories = Category::all();
+        $news = News::all();
         $row = $this->getInclud();
-        $product8 = Product::all();
+        $product8 = Product::where('id','>',0)->limit(12)->get();
         $arr = ['frontPageName' => $frontPageName,
             'discount' => $row['discount'],
             'homePageSlider' => $homePageSlider,
@@ -67,12 +70,15 @@ class FrontPagesControllers extends Controller
             'getBasketAllProductsPrice' => $row['getBasketAllProductsPrice'],
             'autorizedUser' => $row['autorizedUser'],
             'product8' => $product8,
+            'news' => $news,
         ];
 //         function getSiPr($id){
 //            $n = Basket::where('userId',Cookie::get('userKey'))->where('productId',$id)->get();
 //            return $n[0]->productCount;
 //        };
 //        dd(getSiPr(11));
+
+
 
         return view('front.home', $arr);
     }
@@ -85,16 +91,27 @@ class FrontPagesControllers extends Controller
         $frontPageName = 'shop';
         $categories = Category::all();
         if ($category == "all" && $minPrice != "" && $maxPrice != "") {
-            $products = Product::where('price','>',$minPrice)->where('price','<',$maxPrice)->get();
+            $products = Product::where('price','>',$minPrice)->where('price','<',$maxPrice)->paginate(30);
+            $allProducts = Product::all();
+            $filtr = true;
         } else if($category == "all" && $minPrice != ""){
-            $products = Product::where('price','>',$minPrice)->get();
+            $products = Product::where('price','>',$minPrice)->paginate(30);
+            $allProducts = Product::all();
+            $filtr = true;
         } else if($category == "all" && $maxPrice != "") {
-            $products = Product::where('price', '<', $maxPrice)->get();
+            $products = Product::where('price','<',$maxPrice)->paginate(30);
+            $allProducts = Product::all();
+            $filtr = true;
         } else if($category == "all"){
-            $products = Product::all();
+            $products = Product::paginate(30);
+            $allProducts = Product::all();
+            $filtr = false;
         } else {
-            $products = Product::where('category', $category)->get();
+            $products = Product::where('category', $category)->paginate(30);
+            $allProducts = Product::where('category',$category)->get();
+            $filtr = true;
         }
+
         $arr = ['frontPageName' => $frontPageName,
             'discount' => $row['discount'],
             'contactData' => $row['contactData'],
@@ -105,7 +122,13 @@ class FrontPagesControllers extends Controller
             'getBasketAllProductsPrice' => $row['getBasketAllProductsPrice'],
             'autorizedUser' => $row['autorizedUser'],
             'searchError' => null,
+            'pageCount' => ceil(count($allProducts)/30),
+            'filtr' => $filtr,
+
             'categories' => $categories];
+
+
+
         return view('front.shop', $arr);
     }
 
@@ -211,6 +234,7 @@ class FrontPagesControllers extends Controller
         $frontPageName = 'about';
         $aboutCompany = AboutCompany::first();
         $employees = Employee::all();
+        $galery = Galery::all();
         $arr = ['frontPageName' => $frontPageName,
             'discount' => $row['discount'],
             'contactData' => $row['contactData'],
@@ -221,6 +245,7 @@ class FrontPagesControllers extends Controller
             'getBasketAllProductsPrice' => $row['getBasketAllProductsPrice'],
             'autorizedUser' => $row['autorizedUser'],
             'awards' => $row['awards'],
+            'galery' => $galery,
         ];
         return view('front.aboutUs', $arr);
     }

@@ -75,7 +75,7 @@
                             @if($errors->has('firstName')) <span style="color:red">{{$errors->first()}}</span> @endif
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="InputLastname" class="mb-0">Фамилие</label>
+                            <label for="InputLastname" class="mb-0">Фамилия</label>
                             <input type="text" name="lastName" class="form-control" id="InputLastname"
                                    placeholder="Введите фамилие">
                             @if($errors->has('lastName')) <span style="color:red">{{$errors->first()}}</span> @endif
@@ -105,7 +105,7 @@
                             @if($errors->has('login')) <span style="color:red">{{$errors->first()}}</span> @endif
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="InputPassword1" class="mb-0">Павтор пароля</label>
+                            <label for="InputPassword1" class="mb-0">Повтор пароля</label>
                             <input type="password" name="password_confirmation" class="form-control" id="InputPassword1"
                                    placeholder="повторите пароль">
                             @if($errors->has('password_confirmation')) <span

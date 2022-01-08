@@ -17,7 +17,7 @@
             <div class="col-md-12 col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Data Tables2</div>
+                        <div class="card-title">Список продуктов</div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -55,6 +55,34 @@
                                 @endforeach
                                 </tbody>
                             </table>
+{{--                           pagination start --}}
+
+                            <div class="d-flex justify-content-center">
+                                    <ul class="pagination mg-b-0 page-0 ">
+                                        @php
+                                            if(!isset($_GET['page'])){
+                                                $_GET['page'] = 1;    }
+                                        @endphp
+                                        <li class="page-item">
+                                            <a aria-label="Last" class="page-link" href="?page=<?php if(($_GET['page'] - 1) >= 1){ echo $_GET['page'] - 1;}else{echo $_GET['page']-0;}; ?>"><i class="fa fa-angle-double-left"></i></a>
+                                        </li>
+                                        @for($i=0;$i<$pageCount;$i++)
+                                        <li class="page-item
+                                        <?php
+                                        if($_GET['page'] == ($i+1)){ echo "active";}
+                                        ?>
+                                            ">
+                                            <a class="page-link hidden-xs-down" href="?page={{$i+1}}">{{$i+1}}</a>
+                                        </li>
+                                        @endfor
+                                        <li class="page-item ">
+                                            <a aria-label="Last" class="page-link" href="?page=<?php if(($_GET['page'] + 1) <= $pageCount+1){ echo $_GET['page'] + 1;}else{echo $_GET['page'];}; ?>"><i class="fa fa-angle-double-right"></i></a>
+                                        </li>
+                                    </ul>
+
+                                <!-- pagination-wrapper -->
+                            </div>
+{{--                           pagination end --}}
                         </div>
                     </div>
                     <!-- table-wrapper -->

@@ -30,10 +30,10 @@
                             <input type="number" class="form-control" name="price" value=""
                                    placeholder="Текст...">
                             @if($errors->has('price')) <span style="color: red">{{$errors->first()}}</span> @endif
-                            <label class="form-label">каличество на складе</label>
+                            <label class="form-label">количество на складе</label>
                             <input type="number" class="form-control" name="countInStock" value="0"
                                    placeholder="Текст...">
-                            <label class="form-label">Мера изчесления</label>
+                            <label class="form-label">Единица измерения</label>
                             <select name="calculateType" id="select-countries2" class="form-control select2 custom-select">
                                 <option value="1 штука"
                                         data-data='{"image": "https://laravel.spruko.com/adminor/Leftmenu-Icon-DarkSidebar-Dark/assets/images/flags/br.svg"}'>

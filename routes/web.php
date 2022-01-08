@@ -67,6 +67,7 @@ Route::prefix('/admin')->group(function (){
 
     Route::get('/getWholesaleRestrictions',[AdminPagesController::class,'getWholesaleRestrictions'])->middleware('admin')->name('getWholesaleRestrictions');
     Route::post('/updateMinSaleCountForWholesaler',[AdminPagesController::class,'updateMinSaleCountForWholesaler'])->middleware('admin')->name('updateMinSaleCountForWholesaler');
+
     Route::get('/getWholesalersRegistration',[AdminPagesController::class,'getWholesalersRegistration'])->middleware('admin')->name('getWholesalersRegistration');
     Route::post('/createMessage',[MessagesController::class,'createMessage'])->middleware('admin')->name('createMessage');
     Route::get('/deleteMessage/{id}',[MessagesController::class,'deleteMessage'])->middleware('admin')->name('deleteMessage');
@@ -82,8 +83,10 @@ Route::prefix('/frontEdit')->group(function (){
     Route::get('/deleteCategory/{id}',[HomePageEditController::class,'deleteCategory'])->middleware('admin')->name('deleteCategory');
     Route::post('/editContactData',[HomePageEditController::class,'editContactData'])->middleware('admin')->name('editContactData');
     Route::post('/updaetCompanyInfo',[AboutCompanyController::class,'updaetCompanyInfo'])->middleware('admin')->name('updaetCompanyInfo');
+    Route::get('/deleteGaleryImg/{id}',[AboutCompanyController::class,'deleteGaleryImg'])->middleware('admin')->name('deleteGaleryImg');
     Route::post('/createNewEmployee',[AboutCompanyController::class,'createNewEmployee'])->middleware('admin')->name('createNewEmployee');
     Route::get('/deleteEmployee/{id}',[AboutCompanyController::class,'deleteEmployee'])->middleware('admin')->name('deleteEmployee');
+    Route::post('/createNewGaleryImg',[AboutCompanyController::class,'createNewGaleryImg'])->middleware('admin')->name('createNewGaleryImg');
     Route::post('/createProduct',[ShopPageController::class,'createProduct'])->middleware('admin')->name('createProduct');
     Route::get('/deleteProduct/{id}',[ShopPageController::class,'deleteProduct'])->middleware('admin')->name('deleteProduct');
     Route::post('/editProductPrice',[ShopPageController::class,'editProductPrice'])->middleware('admin')->name('editProductPrice');

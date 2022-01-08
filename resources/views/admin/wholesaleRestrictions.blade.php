@@ -28,7 +28,7 @@ Karen
                     </div>
                     <div class="card-footer text-right">
                         <div class="d-flex">
-                            <button type="submit" class="btn btn-primary ml-auto">Сохранит</button>
+                            <button type="submit" class="btn btn-primary ml-auto">Сохранить</button>
                         </div>
                     </div>
                 </form>

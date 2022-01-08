@@ -55,20 +55,39 @@
             @foreach($employees as $val)
             <div class="col-sm-6 col-lg-3">
                 <div class="hover-team">
-                    <div class="our-team"> <img src="{{asset('images/employeesImg/'.$val->imgName)}}" alt="" />
+                   <div class="our-team" style="background-image: url('{{asset('images/employeesImg/'.$val->imgName)}}');background-size: 100% 80%;"> {{-- <img src="{{asset('images/employeesImg/'.$val->imgName)}}" alt="" />--}}
                         <div class="team-content">
                             <h3 class="title">{{$val->name}}</h3> <span class="post">{{$val->position}}</span> </div>
-                        <div class="icon"> <i class="fa fa-plus" aria-hidden="true"></i> </div>
+
                     </div>
                     <hr class="my-0"> </div>
             </div>
             @endforeach
-
-
         </div>
     </div>
 </div>
 <!-- End About Page -->
+
+<!-- Start About Page Galery  -->
+<div class="about-box-main">
+    <div class="container">
+        <div class="row my-5">
+        </div>
+        <div class="row my-4">
+            <div class="col-12">
+                <h2 class="noo-sh-title">Галерея</h2>
+            </div>
+            @foreach($galery as $val)
+                <div class="col-sm-6 col-lg-3">
+                    <div class="hover-team">
+                        <div class="our-team2" style="background-image: url('{{asset('images/galery/'.$val->imgName)}}');background-size: 100% 100%;"> {{-- <img src="" alt="" />--}}
+                        </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+<!-- End About Page Galery-->
 
 <!-- Start Instagram Feed  -->
 @include('include.footer')

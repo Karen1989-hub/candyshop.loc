@@ -11,6 +11,7 @@ use Validator;
 use App\Models\Product;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\Restrictions;
+use Storage;
 
 //        $adminKey= Cookie::get('adminKey');
 //        if ($adminKey == 'ak587238') {
@@ -22,6 +23,30 @@ class ShopPageController extends Controller
 {
     public function createProduct(Request $request)
     {
+        // $xml = simplexml_load_file('text.xml');
+        // copy('https://atag.ru/sites/default/files/tovar/2017/veseloe-putesestvie.png',"images/veseloe-putesestvie.png");
+
+
+
+        // $start = 0;
+
+        // foreach ($xml->shop->offers->offer as $val){
+        //     $start++;
+        //     if($start>310 && $start<=390){
+        //         $imgUrlArr = $val->picture;
+        //         $imgUrl = explode('/',$imgUrlArr);
+        //         $imgName = end($imgUrl);
+        //         //print_r($val->name." & ".$val->price." & ".$val->categoryId." & ".$val->description.);
+        //         Product::create(['title' => $val->name, 'price' => $val->price, 'calculateType' => 1,'countInStock' => 0, 'category' => $val->categoryId, 'description' => $val->description, 'imgName' => $imgName]);
+
+        //         copy($imgUrlArr,"images/productsImg/".$imgName);
+        //     } else {
+        //         continue;
+        //     }
+        // }
+        // die;
+
+
         $title = $request->input('title');
         $price = $request->input('price');
         $calculateType = $request->input('calculateType');
@@ -65,7 +90,10 @@ class ShopPageController extends Controller
     {
         $deletedProduct = Product::where('id',$id)->get();
         $imgName = $deletedProduct[0]->imgName;
-        unlink('images/productsImg/'.$imgName);
+        if(file_exists('images/productsImg/'.$imgName)){
+            unlink('images/productsImg/'.$imgName);
+        }
+
         Product::destroy($id);
 
         return back();

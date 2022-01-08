@@ -44,6 +44,51 @@
             </div>
         </div>
         <!--form end-->
+        <!--galery form start-->
+        <div class="row row-deck">
+            <div class="col-lg-8" style="margin: 0 auto">
+                <form action="{{route('createNewGaleryImg')}}" method="post" class="card" enctype="multipart/form-data">
+                    @csrf
+                    <div class="card-header">
+                        <h3 class="card-title">Зогрузить новые фото в галерею</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-lg-4 col-sm-12 mt-5" style="margin: 0 auto">
+                                <input type="file" name="uploadImg" class="dropify" data-height="180"/>
+                                @if($errors->has('uploadImg')) <span>
+                                    style="color: red">{{$errors->first()}}</span> @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-right">
+                        <div class="d-flex">
+                            <button type="submit" class="btn btn-primary ml-auto">Добавить</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--galery form end-->
+        {{--        table start--}}
+        <div class="row">
+            @foreach($galery as $val)
+                <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
+                    <div class="card card-blog-overlay" style="background-image: url({{asset('images/galery/'.$val->imgName)}});background-size: 100% 100%">
+                        <div class="card-header z-index2 ">
+                            <h3 class="card-title text-white "></h3>
+                            <div class="card-options">
+                                <a href="/frontEdit/deleteGaleryImg/{{$val->id}}" class="card-options-remove" data-toggle=""><i
+                                        class="fe fe-x text-white"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body  text-white pt-9 pb-9">
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    {{--      table start end  --}}
         <!--kontent end-->
     </div>
 </div>

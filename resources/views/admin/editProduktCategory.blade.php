@@ -67,7 +67,7 @@
                                     <td>{{$val->title}}</td>
                                     <th><a href="/frontEdit/deleteCategory/{{$val->id}}"
                                            class="btn btn-outline-danger"
-                                           style="float: right">Удалит</a></th>
+                                           style="float: right">Удалить</a></th>
                                 </tr>
                             @endforeach
                             </tbody>

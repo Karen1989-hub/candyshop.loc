@@ -33,7 +33,7 @@
         <div class="row new-account-login">
             <div class="col-sm-6 col-lg-6 mb-3">
                 <div class="title-left">
-                    <h3>Вход в акаунт</h3>
+                    <h3>Вход в аккаунт</h3>
                 </div>
                 <h5><a data-toggle="collapse" href="#formLogin" role="button" aria-expanded="false">Нажмите сюда для введения логина</a></h5>
                 <form action="{{route('signIn')}}" method="post" class="mt-3 collapse review-form-box" id="formLogin">
@@ -68,8 +68,8 @@
                             @if($errors->has('firstName')) <span style="color:red">{{$errors->first()}}</span> @endif
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="InputLastname" class="mb-0">Фамилие</label>
-                            <input type="text" name="lastName" class="form-control" id="InputLastname" placeholder="Введите фамилие">
+                            <label for="InputLastname" class="mb-0">Фамилия</label>
+                            <input type="text" name="lastName" class="form-control" id="InputLastname" placeholder="Введите фамилия">
                             @if($errors->has('lastName')) <span style="color:red">{{$errors->first()}}</span> @endif
                         </div>
                         <div class="form-group col-md-6">
@@ -93,7 +93,7 @@
                             @if($errors->has('login')) <span style="color:red">{{$errors->first()}}</span> @endif
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="InputPassword1" class="mb-0">Павтор пароля</label>
+                            <label for="InputPassword1" class="mb-0">Повтор пароля</label>
                             <input type="password" name="password_confirmation" class="form-control" id="InputPassword1" placeholder="повторите пароль">
                             @if($errors->has('password_confirmation')) <span style="color:red">{{$errors->first()}}</span> @endif
                         </div>

@@ -39,12 +39,12 @@
                     <div class="footer-link">
                         <h4>Меню</h4>
                         <ul>
-                            <li><a href="#">Главная</a></li>
-                            <li><a href="#">Магазин</a></li>
-                            <li><a href="#">О нас</a></li>
-                            <li><a href="#">Наши награды</a></li>
-                            <li><a href="#">Новости</a></li>
-                            <li><a href="#">Контакты</a></li>
+                            <li><a href="{{route('home')}}">Главная</a></li>
+                            <li><a href="{{route('shop')}}">Магазин</a></li>
+                            <li><a href="{{route('aboutUs')}}">О нас</a></li>
+                            <li><a href="{{route('awards')}}">Наши награды</a></li>
+                            <li><a href="{{route('news')}}">Новости</a></li>
+                            <li><a href="{{route('contactUs')}}">Контакты</a></li>
                         </ul>
                     </div>
                 </div>

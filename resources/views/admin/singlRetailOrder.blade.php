@@ -22,7 +22,7 @@ Karen
                         <table class="table card-table table-vcenter text-nowrap">
                             <thead>
                             <tr>
-                                <th>Но.</th>
+                                <th>Ном.</th>
                                 <th>Название</th>
                                 <th>Количество</th>
                                 <th>Цена</th>

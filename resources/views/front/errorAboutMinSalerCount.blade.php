@@ -41,7 +41,7 @@
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
                                 <div class="row">
-                                    <h2 style="margin: 50px auto">минимальное количество для оптовиков {{$minSaleCountForWholesaler}}</h2>
+                                    <h2 style="margin: 50px auto">Минимальное количество для оптовиков {{$minSaleCountForWholesaler}}</h2>
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="list-view">

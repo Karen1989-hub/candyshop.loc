@@ -71,7 +71,7 @@
                 <div class="col-lg-3 col-md-6 special-grid best-seller">
                     <div class="products-single fix">
                         <div class="box-img-hover">
-                            <img src="{{asset('images/productsImg/'.$val->imgName)}}" class="img-fluid" alt="Image">
+                            <img style="height: 250px;" src="images/productsImg/<?php echo str_replace("%","",$val->imgName); ?>" class="img-fluid" alt="Image">
 
                         </div>
                         <div class="why-text">
@@ -93,51 +93,27 @@
             <div class="col-lg-12">
                 <div class="title-all text-center">
                     <h1>Новости</h1>
-                    <p>Наши последние новости.</p>
+                    <p>Наши последние новости</p>
                 </div>
             </div>
         </div>
 
         <div class="row">
+            @foreach($news as $val)
             <div class="col-md-6 col-lg-4 col-xl-4">
-                <div class="blog-box">
+                <div style="height: 400px;" class="blog-box">
                     <div class="blog-img">
-                        <img class="img-fluid" src="images2/news/2222222.jpg" alt=""/>
+                        <img class="img-fluid" src="{{asset('images/news/'.$val->imgName)}}" alt=""/>
                     </div>
                     <div class="blog-content">
                         <div class="title-blog">
-                            <h3>Давайте встречать новый год в шоколаде</h3>
-                            <p>24/09/2018</p>
+                            <h3>{{$val->title}}</h3>
+                            <p>{{$val->created_at}}</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 col-xl-4">
-                <div class="blog-box">
-                    <div class="blog-img">
-                        <img class="img-fluid" src="images2/news/666555444.jpg" alt=""/>
-                    </div>
-                    <div class="blog-content">
-                        <div class="title-blog">
-                            <h3>Обратите внимание: склад готовой продукции переехал</h3>
-                            <p>16/09/2019</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-4">
-                <div class="blog-box">
-                    <div class="blog-img">
-                        <img class="img-fluid" src="images2/news/img_3133.jpg" alt=""/>
-                    </div>
-                    <div class="blog-content">
-                        <div class="title-blog">
-                            <h3>Истории, составленные нашими покупателями из названий конфет.</h3>
-                            <p>04/09/2018</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>

@@ -6,7 +6,7 @@ Karen
 <div class="app-content  my-3 my-md-5">
     <div class="side-app">
         <div class="page-header">
-            <h4 class="page-title">Список заказов</h4>
+            <h4 class="page-title">Список заказов </h4>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('getWholesalerOrdersList')}}">назад к списку ордеров</a></li>
             </ol>
@@ -16,7 +16,7 @@ Karen
             <div class="col-md-12 col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Розничный ордер номер {{$userOrder[0]->id}} </h3>
+                        <h3 class="card-title">Oптовый ордер номер {{$userOrder[0]->id}} </h3>
                     </div>
                     <div class="table-responsive">
                         <table class="table card-table table-vcenter text-nowrap">

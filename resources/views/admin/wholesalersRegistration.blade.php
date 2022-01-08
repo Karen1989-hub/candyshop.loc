@@ -6,7 +6,7 @@ Karen
 <div class="app-content  my-3 my-md-5">
     <div class="side-app">
         <div class="page-header">
-            <h4 class="page-title">Добавить/удалит оптовика</h4>
+            <h4 class="page-title">Добавить/удалить оптовика</h4>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Регистрация оптовиков</a></li>
             </ol>
